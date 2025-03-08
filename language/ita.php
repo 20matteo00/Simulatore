@@ -21,4 +21,11 @@ define("NON_HAI_UN_ACCOUNT", "Non hai un account?");
 define("UTENTE_NON_TROVATO", "Utente non trovato");
 define("LOGIN_AVVENUTO", "Login avvenuto con successo");
 define("PASSWORD_ERRATA", "Password errata");
+define("PASSWORD_DIMENTICATA", "Password dimenticata?");
+define("RECUPERA", "Recuperala qui");
+define("VERIFICA", "Verifica");
+define("NUOVA_PASSWORD", "Nuova Password");
+define("AGGIORNA_PASSWORD", "Aggiorna Password");
+define("RECUPERA_PASSWORD", "Recupera Password");
+define("PASSWORD_AGGIORNATA_SUCCESSO", "Password aggiornata con successo! Reindirizzamento in corso...");
 ?>

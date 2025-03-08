@@ -22,7 +22,7 @@
                     </li>
                 <?php } else { ?>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="?page=regis"><?php echo REGISTRATI ?></a>
+                        <a class="nav-link" aria-current="page" href="?page=registrazione"><?php echo REGISTRATI ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="?page=login"><?php echo ACCEDI ?></a>

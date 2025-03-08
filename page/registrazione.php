@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
 
     // Verifica che i campi non siano vuoti
     if (empty($username) || empty($email) || empty($password) || empty($confirm)) {
-        echo "<p class='text-center alert alert-danger my-3'>".TUTTI_I_CAMPI_OBBLIGATORI."</p>";
+        $error = TUTTI_I_CAMPI_OBBLIGATORI;
     } elseif ($password != $confirm) {
-        echo "<p class='text-center alert alert-danger my-3'>".PASSWORD_NON_UGUALI."</p>";
+        $error = PASSWORD_NON_UGUALI;
     } else {
         // Verifica se l'email è già registrata
         $query = "SELECT * FROM utenti WHERE email = ?";
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
         $result = $db->executePreparedStatement($query, $params);
 
         if ($result->num_rows > 0) {
-            echo "<p class='text-center alert alert-danger my-3'>".EMAIL_GIA_REGISTRATA."</p>";
+            $error = EMAIL_GIA_REGISTRATA;
         } else {
             // Hash della password
             $hashedPassword = hashPassword($password);
@@ -34,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
             $query = "INSERT INTO utenti (username, email, password, params) VALUES (?, ?, ?, ?)";
             $params = ['ssss', $username, $email, $hashedPassword, 0]; // 'sss' indica che stiamo passando 3 stringhe
             $db->executePreparedStatement($query, $params);
-
-            echo "<p class='text-center alert alert-success my-3'>".REGISTRAZIONE_AVVENUTA."</p>";
+            $success = REGISTRAZIONE_AVVENUTA;
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
             $_SESSION['id'] = $db->getQueryResult("SELECT id FROM utenti WHERE email = '" . $_SESSION['email'] . "'")->fetch_assoc()['id'];
@@ -54,6 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                     <h4><?php echo REGISTRATI ?></h4>
                 </div>
                 <div class="card-body">
+                    <?php if (isset($error)): ?>
+                        <p class="alert alert-danger text-center"><?= $error ?></p>
+                    <?php endif; ?>
+
+                    <?php if (isset($success)): ?>
+                        <p class="alert alert-success text-center"><?= $success ?></p>
+                    <?php endif; ?>
                     <!-- Inizio form di registrazione -->
                     <form method="POST" action="">
                         <!-- Nome Utente -->

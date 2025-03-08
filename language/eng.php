@@ -21,4 +21,11 @@ define("NON_HAI_UN_ACCOUNT", "Don't have an account?");
 define("UTENTE_NON_TROVATO", "User not found");
 define("LOGIN_AVVENUTO", "Login successful");
 define("PASSWORD_ERRATA", "Wrong password");
+define("PASSWORD_DIMENTICATA", "Forgot your password?");
+define("RECUPERA", "Recover it here");
+define("VERIFICA", "Verify");
+define("NUOVA_PASSWORD", "New Password");
+define("AGGIORNA_PASSWORD", "Update Password");
+define("RECUPERA_PASSWORD", "Recover Password");
+define("PASSWORD_AGGIORNATA_SUCCESSO", "Password updated successfully! Redirecting...");
 ?>

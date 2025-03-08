@@ -1,5 +1,4 @@
 <?php
-require_once 'config.php'; // File che avvia la sessione e definisce le costanti dei messaggi e la connessione a $db
 global $db;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
@@ -9,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
 
     // Verifica che i campi non siano vuoti
     if (empty($email) || empty($password)) {
-        echo "<p class='text-center alert alert-danger my-3'>" . TUTTI_I_CAMPI_OBBLIGATORI . "</p>";
+        $error = TUTTI_I_CAMPI_OBBLIGATORI;
     } else {
         // Cerca l'utente nel database tramite email
         $query = "SELECT * FROM utenti WHERE email = ?";
@@ -26,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                 $_SESSION['id'] = $user['id'];
                 // Se disponibile, puoi salvare anche l'ID dell'utente: $_SESSION['user_id'] = $user['id'];
 
-                echo "<p class='text-center alert alert-success my-3'>" . LOGIN_AVVENUTO . "</p>";
+                $success = LOGIN_AVVENUTO;
                 header("Location: index.php?page=home");
                 exit();
             } else {
-                echo "<p class='text-center alert alert-danger my-3'>" . PASSWORD_ERRATA . "</p>";
+                $error = PASSWORD_ERRATA;
             }
         } else {
-            echo "<p class='text-center alert alert-danger my-3'>" . UTENTE_NON_TROVATO . "</p>";
+            $error = UTENTE_NON_TROVATO;
         }
     }
 }
@@ -46,6 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                     <h4><?php echo ACCEDI; ?></h4>
                 </div>
                 <div class="card-body">
+                    <?php if (isset($error)): ?>
+                        <p class="alert alert-danger text-center"><?= $error ?></p>
+                    <?php endif; ?>
+
+                    <?php if (isset($success)): ?>
+                        <p class="alert alert-success text-center"><?= $success ?></p>
+                    <?php endif; ?>
                     <!-- Inizio form di login -->
                     <form method="POST" action="">
                         <!-- Email -->
@@ -65,7 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                     <!-- Fine form di login -->
                 </div>
                 <div class="card-footer text-center">
-                    <p><?php echo NON_HAI_UN_ACCOUNT; ?> <a href="index.php?page=registrazione"><?php echo REGISTRATI; ?></a></p>
+                    <p><?php echo NON_HAI_UN_ACCOUNT ?> <a href="index.php?page=registrazione"><?php echo REGISTRATI ?></a></p>
+                    <p><?php echo PASSWORD_DIMENTICATA ?> <a href="index.php?page=recupero"><?php echo RECUPERA; ?></a></p>
                 </div>
             </div>
         </div>
