@@ -37,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
 
             echo "<p class='text-center alert alert-success my-3'>".REGISTRAZIONE_AVVENUTA."</p>";
             $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            $_SESSION['id'] = $db->getQueryResult("SELECT id FROM utenti WHERE email = '" . $_SESSION['email'] . "'")->fetch_assoc()['id'];
             // Reindirizza alla pagina di login
             header("Location: index.php?page=home");
             exit();
@@ -80,11 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                             <label for="confirm_password" class="form-label"><?php echo CONFERMA_PASSWORD ?></label>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" required
                                 placeholder="Conferma la tua password" required>
-                        </div>
-
-                        <!-- Messaggio di errore (in caso di email già registrata o altro) -->
-                        <div id="error-message" class="alert alert-danger d-none" role="alert">
-                            <!-- Messaggio di errore verrà inserito qui -->
                         </div>
 
                         <!-- Bottone di invio -->

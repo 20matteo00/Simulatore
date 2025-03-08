@@ -17,4 +17,8 @@ define("TUTTI_I_CAMPI_OBBLIGATORI", "All fields are required");
 define("PASSWORD_NON_UGUALI", "Passwords do not match");
 define("EMAIL_GIA_REGISTRATA", "Email already registered");
 define("REGISTRAZIONE_AVVENUTA", "Registration successful");
+define("NON_HAI_UN_ACCOUNT", "Don't have an account?");
+define("UTENTE_NON_TROVATO", "User not found");
+define("LOGIN_AVVENUTO", "Login successful");
+define("PASSWORD_ERRATA", "Wrong password");
 ?>
