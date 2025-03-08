@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4><?php MODIFICA_CAMPIONATO ?></h4>
+                    <h4><?php echo MODIFICA_CAMPIONATO ?></h4>
                 </div>
                 <div class="card-body">
                     <?php if (isset($error)): ?>
