@@ -1,0 +1,6 @@
+[2025-03-07 12:16:46] - File SQL eseguito correttamente. Le tabelle sono state create.
+[2025-03-07 12:31:48] - Le tabelle sono già state create. Niente da fare.
+[2025-03-07 12:31:49] - Le tabelle sono già state create. Niente da fare.
+[2025-03-07 12:31:50] - Le tabelle sono già state create. Niente da fare.
+[2025-03-07 12:31:53] - Le tabelle sono già state create. Niente da fare.
+[2025-03-07 12:33:46] - File SQL eseguito correttamente. Le tabelle sono state create.

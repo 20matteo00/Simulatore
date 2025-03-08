@@ -1,0 +1,11 @@
+[2025-03-07 12:19:29] - Errore: Il file 'page/login.php' non esiste.
+[2025-03-07 12:19:30] - Errore: Il file 'page/login.php' non esiste.
+[2025-03-07 12:19:31] - Errore: Il file 'page/login.php' non esiste.
+[2025-03-07 12:31:48] - Errore: Il file 'page/home.php' non esiste o il percorso non è valido.
+[2025-03-07 12:31:49] - Errore: Il file 'page/home.php' non esiste o il percorso non è valido.
+[2025-03-07 12:31:50] - Errore: Il file 'page/comp.php' non esiste o il percorso non è valido.
+[2025-03-07 12:31:53] - Errore: Il file 'page/home.php' non esiste o il percorso non è valido.
+[2025-03-07 12:39:22] - Errore: Il file 'regis.php' non esiste.
+[2025-03-07 12:39:22] - Errore: Il file 'regis.php' non esiste.
+[2025-03-07 12:39:23] - Errore: Il file 'regis.php' non esiste.
+[2025-03-07 12:39:27] - Errore: Il file 'regis.php' non esiste.
