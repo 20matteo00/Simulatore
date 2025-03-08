@@ -24,7 +24,7 @@ $pageFile = 'page/' . $page . '.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $NOMESITO; ?></title>
+    <title><?php echo NOMESITO; ?></title>
     <!-- STILI -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">

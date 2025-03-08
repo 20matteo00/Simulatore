@@ -1,6 +1,6 @@
 <?php
-$NOMESITO = "Simulator";
-$COMPETIZIONI = "Competition";
-$REGISTRATI = "Registration";
-$ACCEDI = "Login";
+define("NOMESITO", "Simulator");
+define("COMPETIZIONI", "Competition");
+define("REGISTRATI", "Registration");
+define("ACCEDI", "Login");
 ?>

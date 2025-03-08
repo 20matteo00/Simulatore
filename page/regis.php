@@ -6,7 +6,7 @@ function hashPassword($password)
     return password_hash($password, PASSWORD_DEFAULT);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
     // Ottieni i dati dal form
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4><?php echo $REGISTRATI; ?></h4>
+                    <h4><?php echo REGISTRATI; ?></h4>
                 </div>
                 <div class="card-body">
                     <!-- Inizio form di registrazione -->
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
 
                         <!-- Bottone di invio -->
-                        <button type="submit" class="btn btn-primary w-100">Registrati</button>
+                        <button type="submit" class="btn btn-primary w-100" name="invia">Registrati</button>
                     </form>
                     <!-- Fine form di registrazione -->
                 </div>
