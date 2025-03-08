@@ -12,3 +12,9 @@
 [2025-03-08 12:28:27] - Errore: Il file 'page/logout.php' non esiste.
 [2025-03-08 13:07:46] - Errore: Il file 'page/registrazione.php' non esiste.
 [2025-03-08 13:22:04] - Errore: Il file 'page/recupero.php' non esiste.
+[2025-03-08 14:24:55] - Errore: Il file 'page/home/profile.php' non esiste.
+[2025-03-08 14:25:02] - Errore: Il file 'page/comp/comp.php' non esiste.
+[2025-03-08 14:25:05] - Errore: Il file 'page/comp/comp.php' non esiste.
+[2025-03-08 14:28:14] - Errore: Il file 'page/comp/comp.php' non esiste.
+[2025-03-08 14:28:16] - Errore: Il file 'page/comp/comp.php' non esiste.
+[2025-03-08 14:28:30] - Errore: Il file 'page/comp/comp.php' non esiste.

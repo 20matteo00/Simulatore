@@ -9,23 +9,23 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?page=comp"><?php echo COMPETIZIONI ?></a>
+                    <a class="nav-link" aria-current="page" href="?group=comp&page=comp"><?php echo COMPETIZIONI ?></a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto me-2 mb-2 mb-md-0">
                 <?php if (isset($_SESSION['username'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="?page=profile"><?php echo BENVENUTO . " " . $_SESSION['username']; ?></a>
+                        <a class="nav-link" aria-current="page" href="?group=login&page=profile"><?php echo BENVENUTO . " " . $_SESSION['username']; ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="?page=logout"><?php echo ESCI ?></a>
+                        <a class="nav-link" aria-current="page" href="?group=login&page=logout"><?php echo ESCI ?></a>
                     </li>
                 <?php } else { ?>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="?page=registrazione"><?php echo REGISTRATI ?></a>
+                        <a class="nav-link" aria-current="page" href="?group=login&page=registrazione"><?php echo REGISTRATI ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="?page=login"><?php echo ACCEDI ?></a>
+                        <a class="nav-link" aria-current="page" href="?group=login&page=login"><?php echo ACCEDI ?></a>
                     </li>
                 <?php } ?>
             </ul>

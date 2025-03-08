@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (isset($_POST['reset'])) {
         // Step 2: Aggiornamento password
         if (!isset($_SESSION['reset_user']) || !isset($_SESSION['reset_email'])) {
-            header("Location: recupero_password.php");
+            header("index.php?group=login&page=recupero");
             exit();
         }
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             unset($_SESSION['reset_user'], $_SESSION['reset_email']);
 
             $success = PASSWORD_AGGIORNATA_SUCCESSO;
-            header("Refresh: 2; URL=index.php?page=login");
+            header("index.php?group=login&page=login");
             exit();
         }
     }

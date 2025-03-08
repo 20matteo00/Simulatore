@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                 // Imposta le variabili di sessione
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['id'] = $user['id'];
+                $_SESSION['user_id'] = $user['id'];
                 // Se disponibile, puoi salvare anche l'ID dell'utente: $_SESSION['user_id'] = $user['id'];
 
                 $success = LOGIN_AVVENUTO;
-                header("Location: index.php?page=home");
+                header("Location: index.php?group=login&page=profile");
                 exit();
             } else {
                 $error = PASSWORD_ERRATA;
@@ -71,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                     <!-- Fine form di login -->
                 </div>
                 <div class="card-footer text-center">
-                    <p><?php echo NON_HAI_UN_ACCOUNT ?> <a href="index.php?page=registrazione"><?php echo REGISTRATI ?></a></p>
-                    <p><?php echo PASSWORD_DIMENTICATA ?> <a href="index.php?page=recupero"><?php echo RECUPERA; ?></a></p>
+                    <p><?php echo NON_HAI_UN_ACCOUNT ?> <a href="index.php?group=login&page=registrazione"><?php echo REGISTRATI ?></a></p>
+                    <p><?php echo PASSWORD_DIMENTICATA ?> <a href="index.php?group=login&page=recupero"><?php echo RECUPERA; ?></a></p>
                 </div>
             </div>
         </div>

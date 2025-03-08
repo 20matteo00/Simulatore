@@ -32,14 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
 
             // Salva l'utente nel database
             $query = "INSERT INTO utenti (username, email, password, params) VALUES (?, ?, ?, ?)";
-            $params = ['ssss', $username, $email, $hashedPassword, 0]; // 'sss' indica che stiamo passando 3 stringhe
+            $params = ['ssss', $username, $email, $hashedPassword, json_encode([
+                'nome' => '',
+                'cognome' => '',
+                'data_nascita' => '',
+                'luogo_nascita' => '',
+                'telefono' => ''
+            ])];
             $db->executePreparedStatement($query, $params);
+
             $success = REGISTRAZIONE_AVVENUTA;
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
-            $_SESSION['id'] = $db->getQueryResult("SELECT id FROM utenti WHERE email = '" . $_SESSION['email'] . "'")->fetch_assoc()['id'];
+            $_SESSION['user_id'] = $db->getQueryResult("SELECT id FROM utenti WHERE email = '" . $_SESSION['email'] . "'")->fetch_assoc()['id'];
             // Reindirizza alla pagina di login
-            header("Location: index.php?page=home");
+            header("Location: index.php?group=login&page=profile");
             exit();
         }
     }
@@ -96,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                     <!-- Fine form di registrazione -->
                 </div>
                 <div class="card-footer text-center">
-                    <p><?php echo HAI_GIA_UN_ACCOUNT ?> <a href="index.php?page=login"><?php echo ACCEDI ?></a></p>
+                    <p><?php echo HAI_GIA_UN_ACCOUNT ?> <a href="index.php?group=login&page=login"><?php echo ACCEDI ?></a></p>
                 </div>
             </div>
         </div>

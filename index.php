@@ -7,16 +7,25 @@ global $db, $lang;
 $db = new Database();
 $conn = $db->getConnection();
 checkCreateTable($conn);
-$lang = "ita";
+// Imposta la lingua scelta dall'utente o usa quella di default
 if (isset($_POST['lingua'])) {
-    $lang = $_POST['lingua'];
+    $_SESSION['lang'] = $_POST['lingua'];
 }
-include('language/' . $lang . '.php');  // Concatenazione della variabile con il nome del file
+$lang = $_SESSION['lang'] ?? 'ita';
+// Includi il file della lingua
+if (!file_exists("language/$lang.php")) {
+    $lang = 'ita'; // Se il file non esiste, usa la lingua di default
+}
+include "language/$lang.php";
 $page = "home";
+$group = "home";
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 }
-$pageFile = 'page/' . $page . '.php';
+if (isset($_GET['group'])) {
+    $group = $_GET['group'];
+}
+$pageFile = 'page/' . $group . "/" . $page . '.php';
 ?>
 
 <!DOCTYPE html>

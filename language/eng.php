@@ -28,4 +28,12 @@ define("NUOVA_PASSWORD", "New Password");
 define("AGGIORNA_PASSWORD", "Update Password");
 define("RECUPERA_PASSWORD", "Recover Password");
 define("PASSWORD_AGGIORNATA_SUCCESSO", "Password updated successfully! Redirecting...");
+define("PROFILO", "Profile");
+define("NOME", "Name");
+define("COGNOME", "Surname");
+define("DATA_NASCITA", "Date of Birth");
+define("LUOGO_NASCITA", "Place of Birth");
+define("TELEFONO", "Phone");
+define("AGGIORNA_PROFILO", "Update Profile");
+define("DATI_AGGIORNATI", "Data updated successfully");
 ?>
