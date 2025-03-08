@@ -2,6 +2,7 @@
 // Includi il file di connessione al database
 include('config.php');
 include('helper.php');
+session_start();
 global $db, $lang;
 $db = new Database();
 $conn = $db->getConnection();

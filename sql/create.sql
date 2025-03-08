@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
     `username` VARCHAR(50) NOT NULL,        -- Username
     `email` VARCHAR(100) NOT NULL,          -- Email
     `password` VARCHAR(255) NOT NULL,       -- Password
+    `params` JSON NOT NULL,                 -- JSON con parametri generali
     `data` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Data
     PRIMARY KEY (`id`)                      -- Definisce la chiave primaria
 );

@@ -9,3 +9,4 @@
 [2025-03-07 12:39:22] - Errore: Il file 'regis.php' non esiste.
 [2025-03-07 12:39:23] - Errore: Il file 'regis.php' non esiste.
 [2025-03-07 12:39:27] - Errore: Il file 'regis.php' non esiste.
+[2025-03-08 12:28:27] - Errore: Il file 'page/logout.php' non esiste.

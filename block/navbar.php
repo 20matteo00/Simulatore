@@ -13,12 +13,21 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto me-2 mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?page=regis"><?php echo REGISTRATI ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?page=login"><?php echo ACCEDI ?></a>
-                </li>
+                <?php if (isset($_SESSION['username'])) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?page=profile"><?php echo BENVENUTO . " " . $_SESSION['username']; ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?page=logout"><?php echo ESCI ?></a>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?page=regis"><?php echo REGISTRATI ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?page=login"><?php echo ACCEDI ?></a>
+                    </li>
+                <?php } ?>
             </ul>
             <form method="POST" action="">
                 <select name="lingua" onchange="this.form.submit()">
