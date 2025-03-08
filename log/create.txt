@@ -6,3 +6,5 @@
 [2025-03-07 12:33:46] - File SQL eseguito correttamente. Le tabelle sono state create.
 [2025-03-08 11:21:57] - File SQL eseguito correttamente. Le tabelle sono state create.
 [2025-03-08 12:39:56] - File SQL eseguito correttamente. Le tabelle sono state create.
+[2025-03-08 15:32:24] - File SQL eseguito correttamente. Le tabelle sono state create.
+[2025-03-08 15:39:08] - File SQL eseguito correttamente. Le tabelle sono state create.

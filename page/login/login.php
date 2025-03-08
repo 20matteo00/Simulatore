@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['user_id'] = $user['id'];
                 // Se disponibile, puoi salvare anche l'ID dell'utente: $_SESSION['user_id'] = $user['id'];
+                $query_update = "UPDATE utenti SET data_ultimo_accesso = NOW() WHERE id = ?";
+                $params_update = ['i', $user['id']];
+                $db->executePreparedStatement($query_update, $params_update);
 
                 $success = LOGIN_AVVENUTO;
                 header("Location: index.php?group=login&page=profile");

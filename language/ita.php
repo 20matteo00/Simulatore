@@ -31,6 +31,22 @@ define("LUOGO_NASCITA", "Luogo di Nascita");
 define("TELEFONO", "Telefono");
 define("AGGIORNA_PROFILO", "Aggiorna Profilo");
 
+// Form (campionato)
+define("CREAZIONE_CAMPIONATO", "Creazione Campionato");
+define("LOGO", "Logo");
+define("STATO", "Stato");
+define("LIVELLO", "Livello");
+define("TIPO", "Tipo");
+define("CREA_CAMPIONATO", "Crea Campionato");
+define("MODIFICA_CAMPIONATO", "Modifica Campionato");
+
+// Campionati
+define("LISTA_CAMPIONATI", "Lista Campionati");
+define("DETTAGLI", "Dettagli");
+define("AZIONI", "Azioni");
+define("MODIFICA", "Modifica");
+define("ELIMINA", "Elimina");
+
 // Info
 define("HAI_GIA_UN_ACCOUNT", "Hai già un account?");
 define("NON_HAI_UN_ACCOUNT", "Non hai un account?");
@@ -43,10 +59,17 @@ define("EMAIL_GIA_REGISTRATA", "Email già registrata");
 define("UTENTE_NON_TROVATO", "Utente non trovato");
 define("PASSWORD_ERRATA", "Password errata");
 define("PASSWORD_DIMENTICATA", "Password dimenticata?");
+define("NESSUN_CAMPIONATO", "Nessun campionato trovato");
+define("FORMATO_LOGO_NON_CONSENTITO", "Formato del logo non consentito");
+define("ERRORE_UPLOAD", "Errore durante l'upload del file");
+define("LOGO_NON_VALIDO", "Logo non valido");
 
 // Successo
 define("REGISTRAZIONE_AVVENUTA", "Registrazione avvenuta con successo");
 define("LOGIN_AVVENUTO", "Login avvenuto con successo");
 define("PASSWORD_AGGIORNATA_SUCCESSO", "Password aggiornata con successo! Reindirizzamento in corso...");
 define("DATI_AGGIORNATI", "Dati aggiornati con successo");
+define("CAMPIONATO_CREATO", "Campionato creato con successo");
+define("CAMPIONATO_MODIFICATO", "Campionato modificato con successo");
+define("CAMPIONATO_ELIMINATO", "Campionato eliminato con successo");
 ?>

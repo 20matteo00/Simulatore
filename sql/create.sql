@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS `competizioni` (
     `statistiche` JSON NOT NULL,                     -- JSON con statistiche (vittorie, pareggi, sconfitte, ecc.)
     `partite` JSON NOT NULL,                         -- JSON con i dati delle partite
     `data_creazione` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Data creazione
-    `data_ultimo_update` DATETIME DEFAULT NULL,      -- Data ultimo aggiornamento
     PRIMARY KEY (`id`),                              -- La chiave primaria
     FOREIGN KEY (`user_id`) REFERENCES `utenti`(`id`) ON DELETE CASCADE -- Relazione con la tabella utenti
 );
@@ -33,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `campionati` (
     `logo` VARCHAR(255) NOT NULL,                  -- URL del logo del campionato
     `params` JSON NOT NULL,                        -- JSON con parametri generali del campionato
     `data_creazione` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Data creazione
-    `data_ultimo_update` DATETIME DEFAULT NULL,    -- Data ultimo aggiornamento
     PRIMARY KEY (`id`),                            -- La chiave primaria
     FOREIGN KEY (`user_id`) REFERENCES `utenti`(`id`) ON DELETE CASCADE -- Relazione con la tabella utenti
 );
@@ -47,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `squadre` (
     `params` JSON NOT NULL,                        -- JSON con parametri generali della squadra
     `campionato_id` INT(11) NOT NULL,              -- ID del campionato a cui la squadra appartiene (chiave esterna)
     `data_creazione` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Data creazione
-    `data_ultimo_update` DATETIME DEFAULT NULL,    -- Data ultimo aggiornamento
     PRIMARY KEY (`id`),                            -- La chiave primaria
     FOREIGN KEY (`user_id`) REFERENCES `utenti`(`id`) ON DELETE CASCADE,  -- Relazione con la tabella utenti
     FOREIGN KEY (`campionato_id`) REFERENCES `campionati`(`id`) ON DELETE CASCADE  -- Relazione con la tabella campionati

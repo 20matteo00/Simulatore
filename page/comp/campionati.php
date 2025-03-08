@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
         // Assicurati che l'estensione sia valida
         $valid_extensions = ['jpg', 'jpeg', 'png', 'gif'];
         if (!in_array($extension, $valid_extensions)) {
-            $error = "Formato logo non valido. I formati consentiti sono: JPG, PNG, GIF.";
+            $error = FORMATO_LOGO_NON_CONSENTITO;
         }
 
         // Definire la cartella dell'utente
@@ -52,14 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
             // Esegui la query preparata
             $db->executePreparedStatement($query, $params_db);
 
-            $success = "Campionato creato con successo!";
+            $success = CAMPIONATO_CREATO;
             header("Location: index.php?group=comp&page=campionati");
             exit();
         } else {
-            $error = "Errore durante l'upload del logo.";
+            $error = ERRORE_UPLOAD;
         }
     } else {
-        $error = "Logo non valido.";
+        $error = LOGO_NON_VALIDO;
     }
 }
 ?>
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4>Creazione Campionato</h4>
+                    <h4><?php echo CREAZIONE_CAMPIONATO ?></h4>
                 </div>
                 <div class="card-body">
                     <?php if (isset($error)): ?>
@@ -84,38 +84,100 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
                         <div class="row g-3">
                             <!-- Nome del campionato -->
                             <div class="col-md-6">
-                                <label class="form-label">Nome Campionato</label>
+                                <label class="form-label"><?php echo NOME ?></label>
                                 <input type="text" class="form-control" name="nome" required>
                             </div>
 
                             <!-- Logo del campionato -->
                             <div class="col-md-6">
-                                <label class="form-label">Logo del Campionato</label>
+                                <label class="form-label"><?php echo LOGO ?></label>
                                 <input type="file" class="form-control" name="logo" accept="image/*" required>
                             </div>
 
                             <!-- Stato del campionato -->
                             <div class="col-md-4">
-                                <label class="form-label">Stato</label>
+                                <label class="form-label"><?php echo STATO ?></label>
                                 <input type="text" class="form-control" name="stato">
                             </div>
 
                             <!-- Livello del campionato -->
                             <div class="col-md-4">
-                                <label class="form-label">Livello</label>
+                                <label class="form-label"><?php echo LIVELLO ?></label>
                                 <input type="number" class="form-control" name="livello">
                             </div>
 
                             <!-- Tipo del campionato -->
                             <div class="col-md-4">
-                                <label class="form-label">Tipo</label>
+                                <label class="form-label"><?php echo TIPO ?></label>
                                 <input type="text" class="form-control" name="tipo">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-4" name="crea_campionato">Crea Campionato</button>
+                        <button type="submit" class="btn btn-primary w-100 mt-4" name="crea_campionato"><?php echo CREA_CAMPIONATO ?></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
+<?php
+$query = "SELECT id, nome, logo, params FROM campionati";
+$campionati = $db->getQueryResult($query);
+?>
+<h2 class="mt-5 mb-3 text-center"><?php echo LISTA_CAMPIONATI ?></h2>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-dark">
+            <tr>
+                <th class="col-1"><?php echo LOGO ?></th>
+                <th class="col-2"><?php echo NOME ?></th>
+                <th class="col-7 text-start"><?php echo DETTAGLI ?></th>
+                <th class="col-2"><?php echo AZIONI ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($campionati)): ?>
+                <?php foreach ($campionati as $campionato): ?>
+                    <tr id="row-<?= $campionato['id'] ?>">
+                        <!-- Colonna Logo -->
+                        <td class="text-center align-middle" style="width: 10%;">
+                            <img src="<?= htmlspecialchars($campionato['logo']) ?>" alt="Logo" class="rounded-circle myimg">
+                        </td>
+
+                        <!-- Colonna Nome -->
+                        <td class="fw-bold align-middle" style="width: 15%;"><?= htmlspecialchars($campionato['nome']) ?></td>
+
+                        <!-- Colonna Dettagli -->
+                        <td class="align-middle text-start">
+                            <?php
+                            $params = json_decode($campionato['params'], true);
+                            foreach ($params as $key => $value) {
+                                echo "<p class='m-0'><strong>" . ucfirst($key) . ":</strong> $value</p>";
+                            }
+                            ?>
+                        </td>
+
+                        <!-- Colonna Azione -->
+                        <td class="text-center align-middle">
+                            <div class="d-flex flex-column">
+                                <a href="index.php?group=utility&page=modifica_campionato&id=<?= $campionato['id'] ?>" class="btn btn-warning btn-sm mb-2">
+                                    <span class="bi-pencil me-1"></span> <?php echo MODIFICA ?>
+                                </a>
+                                <a href="index.php?group=utility&page=elimina_campionato&id=<?= $campionato['id'] ?>" class="btn btn-danger btn-sm">
+                                    <span class="bi-trash me-1"></span> <?php echo ELIMINA ?>
+                                </a>
+                            </div>
+                        </td>
+
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4" class="text-center text-muted"><?php echo NESSUN_CAMPIONATO ?></td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
 </div>

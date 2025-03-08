@@ -9,6 +9,13 @@
   --bs-dark: #212529;
 }
 
+/*Generale*/
+.myimg{
+  width: 100%;
+  height: auto;
+  max-width: 80px;
+}
+
 /*NAVBAR*/
 .navbar-brand{
     color: var(--bs-danger);

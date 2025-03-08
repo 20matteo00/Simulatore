@@ -37,6 +37,7 @@ $pageFile = 'page/' . $group . "/" . $page . '.php';
     <title><?php echo NOMESITO; ?></title>
     <!-- STILI -->
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/icone/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- SCRIPT -->
     <script src="js/bootstrap.bundle.js"></script>
