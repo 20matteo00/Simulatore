@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
     <div class="container">
-        <a class="navbar-brand fs-2 fw-bold me-5" href="?page=home"><?php echo NOMESITO ?></a>
+        <a class="navbar-brand fs-2 fw-bold me-5" href="?group=home&page=home"><?php echo NOMESITO ?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,9 +8,17 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="?group=comp&page=comp"><?php echo COMPETIZIONI ?></a>
-                </li>
+                <?php if (isset($_SESSION['username'])) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?group=comp&page=competizioni"><?php echo COMPETIZIONI ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?group=comp&page=campionati"><?php echo CAMPIONATI ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="?group=comp&page=squadre"><?php echo SQUADRE ?></a>
+                    </li>
+                <?php } ?>
             </ul>
             <ul class="navbar-nav ms-auto me-2 mb-2 mb-md-0">
                 <?php if (isset($_SESSION['username'])) { ?>

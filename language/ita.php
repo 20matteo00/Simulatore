@@ -36,4 +36,6 @@ define("LUOGO_NASCITA", "Luogo di Nascita");
 define("TELEFONO", "Telefono");
 define("AGGIORNA_PROFILO", "Aggiorna Profilo");
 define("DATI_AGGIORNATI", "Dati aggiornati con successo");
+define("CAMPIONATI", "Campionati");
+define("SQUADRE", "Squadre");
 ?>
