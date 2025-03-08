@@ -40,6 +40,15 @@ define("TIPO", "Tipo");
 define("CREA_CAMPIONATO", "Crea Campionato");
 define("MODIFICA_CAMPIONATO", "Modifica Campionato");
 
+// Form (squadra)
+define("CREAZIONE_SQUADRE", "Creazione Squadre");
+define("CAMPIONATO", "Campionato");
+define("COLORE1", "Colore 1");
+define("COLORE2", "Colore 2");
+define("VALORE", "Valore");
+define("CREA_SQUADRA", "Crea Squadra");
+
+
 // Campionati
 define("LISTA_CAMPIONATI", "Lista Campionati");
 define("DETTAGLI", "Dettagli");

@@ -31,6 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
             mkdir($user_folder, 0777, true); // Creiamo la cartella con permessi di scrittura
         }
 
+        $user_folder = 'images/' . $user_id . '/campionati';
+
+        // Se la cartella non esiste, la creiamo
+        if (!file_exists($user_folder)) {
+            mkdir($user_folder, 0777, true); // Creiamo la cartella con permessi di scrittura
+        }
+
         // Creare il percorso del logo con il nome del campionato e l'estensione corretta
         $logo_path = $user_folder . '/' . preg_replace('/[^a-zA-Z0-9-_\.]/', '', $nome) . '.' . $extension;
 
@@ -122,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
 
 
 <?php
-$query = "SELECT id, nome, logo, params FROM campionati";
+$query = "SELECT id, nome, logo, params FROM campionati WHERE user_id = ".$_SESSION['user_id']." ORDER BY id DESC";
 $campionati = $db->getQueryResult($query);
 ?>
 <h2 class="mt-5 mb-3 text-center"><?php echo LISTA_CAMPIONATI ?></h2>
@@ -141,12 +148,12 @@ $campionati = $db->getQueryResult($query);
                 <?php foreach ($campionati as $campionato): ?>
                     <tr id="row-<?= $campionato['id'] ?>">
                         <!-- Colonna Logo -->
-                        <td class="text-center align-middle" style="width: 10%;">
+                        <td class="text-center align-middle">
                             <img src="<?= htmlspecialchars($campionato['logo']) ?>" alt="Logo" class="rounded-circle myimg">
                         </td>
 
                         <!-- Colonna Nome -->
-                        <td class="fw-bold align-middle" style="width: 15%;"><?= htmlspecialchars($campionato['nome']) ?></td>
+                        <td class="fw-bold align-middle"><?= htmlspecialchars($campionato['nome']) ?></td>
 
                         <!-- Colonna Dettagli -->
                         <td class="align-middle text-start">
