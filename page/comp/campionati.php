@@ -1,5 +1,7 @@
 <?php
 global $db;
+// Array degli stati europei
+$european_countries = ["Albania", "Andorra", "Armenia", "Austria", "Azerbaigian", "Bielorussia", "Belgio", "Bosnia ed Erzegovina", "Bulgaria", "Croazia", "Cipro", "Danimarca", "Estonia", "Finlandia", "Francia", "Georgia", "Germania", "Grecia", "Irlanda", "Islanda", "Italia", "Kazakhstan", "Kosovo", "Lettonia", "Liechtenstein", "Lituania", "Lussemburgo", "Malta", "Moldavia", "Monaco", "Montenegro", "Paesi Bassi", "Polonia", "Portogallo", "Regno Unito", "Repubblica Ceca", "Romania", "Russia", "San Marino", "Serbia", "Slovacchia", "Slovenia", "Spagna", "Svezia", "Svizzera", "Turchia", "Ucraina", "Ungheria"];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
     $nome = $_POST['nome'] ?? '';
@@ -104,22 +106,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
                             <!-- Stato del campionato -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo STATO ?></label>
-                                <input type="text" class="form-control" name="stato">
+                                <select class="form-control" name="stato">
+                                    <?php
+                                    // Ciclo per generare le opzioni
+                                    foreach ($european_countries as $country) {
+                                        // Imposta l'opzione come selezionata se corrisponde al valore attuale
+                                        $selected = ($selected_state === $country) ? 'selected' : '';
+                                        echo "<option value=\"$country\">$country</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
 
                             <!-- Livello del campionato -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo LIVELLO ?></label>
-                                <input type="number" class="form-control" name="livello">
+                                <select class="form-control" name="livello" id="livello">
+                                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                    <?php endfor; ?>
+                                </select>
                             </div>
 
                             <!-- Tipo del campionato -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo TIPO ?></label>
-                                <input type="text" class="form-control" name="tipo">
+                                <select class="form-control" name="tipo" id="tipo">
+                                    <option value="Campionato">Campionato</option>
+                                    <option value="Coppa">Coppa</option>
+                                </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-4" name="crea_campionato"><?php echo CREA_CAMPIONATO ?></button>
+                        <button type="submit" class="btn btn-primary w-100 mt-4"
+                            name="crea_campionato"><?php echo CREA_CAMPIONATO ?></button>
                     </form>
                 </div>
             </div>
@@ -129,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
 
 
 <?php
-$query = "SELECT id, nome, logo, params FROM campionati WHERE user_id = ".$_SESSION['user_id']." ORDER BY id DESC";
+$query = "SELECT id, nome, logo, params FROM campionati WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY id ASC";
 $campionati = $db->getQueryResult($query);
 ?>
 <h2 class="mt-5 mb-3 text-center"><?php echo LISTA_CAMPIONATI ?></h2>
@@ -159,19 +178,29 @@ $campionati = $db->getQueryResult($query);
                         <td class="align-middle text-start">
                             <?php
                             $params = json_decode($campionato['params'], true);
-                            foreach ($params as $key => $value) {
-                                echo "<p class='m-0'><strong>" . ucfirst($key) . ":</strong> $value</p>";
+                            if ($params) {
+                                echo "<table>"; // Aggiungi spacing tra le celle
+                                foreach ($params as $key => $value) {
+                                    echo "<tr>";
+                                    echo "<td style='padding-right: 20px;'><strong>" . ucfirst($key) . ":</strong></td>";  // Chiave
+                                    echo "<td>$value</td>";  // Valore
+                                    echo "</tr>";
+                                }
+                                echo "</table>";
                             }
                             ?>
                         </td>
 
+
                         <!-- Colonna Azione -->
                         <td class="text-center align-middle">
                             <div class="d-flex flex-column">
-                                <a href="index.php?group=utility&page=modifica_campionato&id=<?= $campionato['id'] ?>" class="btn btn-warning btn-sm mb-2">
+                                <a href="index.php?group=utility&page=modifica_campionato&id=<?= $campionato['id'] ?>"
+                                    class="btn btn-warning btn-sm mb-2">
                                     <span class="bi-pencil me-1"></span> <?php echo MODIFICA ?>
                                 </a>
-                                <a href="index.php?group=utility&page=elimina_campionato&id=<?= $campionato['id'] ?>" class="btn btn-danger btn-sm">
+                                <a href="index.php?group=utility&page=elimina_campionato&id=<?= $campionato['id'] ?>"
+                                    class="btn btn-danger btn-sm">
                                     <span class="bi-trash me-1"></span> <?php echo ELIMINA ?>
                                 </a>
                             </div>

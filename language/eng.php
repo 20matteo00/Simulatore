@@ -40,12 +40,24 @@ define("TIPO", "Type");
 define("CREA_CAMPIONATO", "Create League");
 define("MODIFICA_CAMPIONATO", "Edit League");
 
+// Form (squadra)
+define("CREAZIONE_SQUADRE", "Create Teams");
+define("CAMPIONATO", "League");
+define("COLORE1", "Color 1");
+define("COLORE2", "Color 2");
+define("VALORE", "Value");
+define("CREA_SQUADRA", "Create Team");
+define("MODIFICA_SQUADRA", "Edit Team");
+
 // Campionati
 define("LISTA_CAMPIONATI", "League List");
 define("DETTAGLI", "Details");
 define("AZIONI", "Actions");
 define("MODIFICA", "Edit");
 define("ELIMINA", "Delete");
+
+// Squadre
+define("LISTA_SQUADRE", "Team List");
 
 //Info
 define("HAI_GIA_UN_ACCOUNT", "Already have an account?");
@@ -63,6 +75,7 @@ define("NESSUN_CAMPIONATO", "No league found");
 define("FORMATO_LOGO_NON_CONSENTITO", "Logo format not allowed");
 define("ERRORE_UPLOAD", "Error uploading file");
 define("LOGO_NON_VALIDO", "Invalid logo");
+define("CAMPIONATO_NON_ELIMINABILE", "League cannot be deleted");
 
 // Successo
 define("REGISTRAZIONE_AVVENUTA", "Registration successful");
@@ -72,4 +85,7 @@ define("DATI_AGGIORNATI", "Data updated successfully");
 define("CAMPIONATO_CREATO", "League created successfully");
 define("CAMPIONATO_MODIFICATO", "League modified successfully");
 define("CAMPIONATO_ELIMINATO", "League deleted successfully");
+define("SQUADRA_CREATA", "Team created successfully");
+define("SQUADRA_MODIFICATA", "Team modified successfully");
+define("SQUADRA_ELIMINATA", "Team deleted successfully");
 ?>

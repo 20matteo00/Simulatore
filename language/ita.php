@@ -47,7 +47,7 @@ define("COLORE1", "Colore 1");
 define("COLORE2", "Colore 2");
 define("VALORE", "Valore");
 define("CREA_SQUADRA", "Crea Squadra");
-
+define("MODIFICA_SQUADRA", "Modifica Squadra");
 
 // Campionati
 define("LISTA_CAMPIONATI", "Lista Campionati");
@@ -55,6 +55,9 @@ define("DETTAGLI", "Dettagli");
 define("AZIONI", "Azioni");
 define("MODIFICA", "Modifica");
 define("ELIMINA", "Elimina");
+
+// Squadre
+define("LISTA_SQUADRE", "Lista Squadre");
 
 // Info
 define("HAI_GIA_UN_ACCOUNT", "Hai già un account?");
@@ -72,6 +75,7 @@ define("NESSUN_CAMPIONATO", "Nessun campionato trovato");
 define("FORMATO_LOGO_NON_CONSENTITO", "Formato del logo non consentito");
 define("ERRORE_UPLOAD", "Errore durante l'upload del file");
 define("LOGO_NON_VALIDO", "Logo non valido");
+define("CAMPIONATO_NON_ELIMINABILE", "Impossibile eliminare il campionato: ci sono squadre associate");
 
 // Successo
 define("REGISTRAZIONE_AVVENUTA", "Registrazione avvenuta con successo");
@@ -81,4 +85,7 @@ define("DATI_AGGIORNATI", "Dati aggiornati con successo");
 define("CAMPIONATO_CREATO", "Campionato creato con successo");
 define("CAMPIONATO_MODIFICATO", "Campionato modificato con successo");
 define("CAMPIONATO_ELIMINATO", "Campionato eliminato con successo");
+define("SQUADRA_CREATA", "Squadra creata con successo");
+define("SQUADRA_MODIFICATA", "Squadra modificata con successo");
+define("SQUADRA_ELIMINATA", "Squadra eliminata con successo");
 ?>

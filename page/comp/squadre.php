@@ -3,9 +3,9 @@ global $db;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
     $nome = $_POST['nome'] ?? '';
-    $colore1 = $_POST['colore1'] ?? '';
-    $colore2 = $_POST['colore2'] ?? '';
-    $valore = $_POST['valore'] ?? '';
+    $colore1 = $_POST['colore1'] ?? '#000000';
+    $colore2 = $_POST['colore2'] ?? '#ffffff';
+    $valore = $_POST['valore'] ?? 0;
     $campionato = $_POST['campionato'] ?? '';
     $user_id = $_SESSION['user_id']; // L'ID dell'utente loggato
 
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
             // Esegui la query preparata
             $db->executePreparedStatement($query, $params_db);
 
-            $success = CAMPIONATO_CREATO;
+            $success = SQUADRA_CREATA;
             header("Location: index.php?group=comp&page=squadre");
             exit();
         } else {
@@ -94,19 +94,19 @@ $campionati = $db->getQueryResult($query);  // Eseguiamo la query e otteniamo i 
 
                     <form method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
-                            <!-- Nome del campionato -->
+                            <!-- Nome della squadra -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo NOME ?></label>
                                 <input type="text" class="form-control" name="nome" required>
                             </div>
 
-                            <!-- Logo del campionato -->
+                            <!-- Logo della squadra -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo LOGO ?></label>
                                 <input type="file" class="form-control" name="logo" accept="image/*" required>
                             </div>
 
-                            <!-- Logo del campionato -->
+                            <!-- Campionato -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo CAMPIONATO ?></label>
                                 <select class="form-select" name="campionato" required>
@@ -118,25 +118,26 @@ $campionati = $db->getQueryResult($query);  // Eseguiamo la query e otteniamo i 
                                 </select>
                             </div>
 
-                            <!-- Stato del campionato -->
+                            <!-- Colore 1 della squadra -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo COLORE1 ?></label>
-                                <input type="color" class="form-control" name="colore1">
+                                <input type="color" class="form-control" name="colore1" value="#000000">
                             </div>
 
-                            <!-- Livello del campionato -->
+                            <!-- Colore 2 della squadra -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo COLORE2 ?></label>
-                                <input type="color" class="form-control" name="colore2">
+                                <input type="color" class="form-control" name="colore2" value="#ffffff">
                             </div>
 
-                            <!-- Tipo del campionato -->
+                            <!-- Valore della squadra -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo VALORE ?></label>
-                                <input type="number" class="form-control" name="valore">
+                                <input type="number" class="form-control" name="valore" value="0">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-4" name="crea_campionato"><?php echo CREA_SQUADRA ?></button>
+                        <button type="submit" class="btn btn-primary w-100 mt-4"
+                            name="crea_campionato"><?php echo CREA_SQUADRA ?></button>
                     </form>
                 </div>
             </div>
@@ -157,7 +158,7 @@ $query = "
     FROM squadre
     JOIN campionati ON squadre.campionato_id = campionati.id
     WHERE squadre.user_id = " . intval($_SESSION['user_id']) . " 
-    ORDER BY squadre.id DESC
+    ORDER BY squadre.id ASC
 ";
 $squadre = $db->getQueryResult($query);
 ?>
@@ -194,9 +195,21 @@ $squadre = $db->getQueryResult($query);
                             <?php
                             $params = json_decode($squadra['params'], true);
                             if ($params) {
+                                echo "<table>";
                                 foreach ($params as $key => $value) {
-                                    echo "<p class='m-0'><strong>" . ucfirst($key) . ":</strong> $value</p>";
+                                    // Aggiungi una riga per ogni chiave e valore
+                                    echo "<tr>";
+                                    echo "<td style='padding-right: 20px;'><strong>" . ucfirst($key) . ":</strong></td>";
+                                    if ($key === 'colore1' || $key === 'colore2') {
+                                        // Se il valore è un colore, visualizzalo come input di tipo 'color'
+                                        echo "<td><input type='color' value='$value' disabled></td>";
+                                    } else {
+                                        // Altrimenti, mostra il valore come testo
+                                        echo "<td>$value</td>";
+                                    }
+                                    echo "</tr>";
                                 }
+                                echo "</table>";
                             }
                             ?>
                         </td>
@@ -204,10 +217,12 @@ $squadre = $db->getQueryResult($query);
                         <!-- Colonna Azione -->
                         <td class="text-center align-middle">
                             <div class="d-flex flex-column">
-                                <a href="index.php?group=utility&page=modifica_campionato&id=<?= $squadra['id'] ?>" class="btn btn-warning btn-sm mb-2">
+                                <a href="index.php?group=utility&page=modifica_squadra&id=<?= $squadra['id'] ?>"
+                                    class="btn btn-warning btn-sm mb-2">
                                     <span class="bi-pencil me-1"></span> <?php echo MODIFICA ?>
                                 </a>
-                                <a href="index.php?group=utility&page=elimina_campionato&id=<?= $squadra['id'] ?>" class="btn btn-danger btn-sm">
+                                <a href="index.php?group=utility&page=elimina_squadra&id=<?= $squadra['id'] ?>"
+                                    class="btn btn-danger btn-sm">
                                     <span class="bi-trash me-1"></span> <?php echo ELIMINA ?>
                                 </a>
                             </div>
