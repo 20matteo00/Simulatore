@@ -45,25 +45,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
 
         // Spostiamo il file nella cartella dell'utente con il nome scelto
         if (move_uploaded_file($logo_tmp_name, $logo_path)) {
-            // Crea un array con i parametri JSON
-            $params = json_encode([
-                'stato' => $stato,
-                'livello' => $livello,
-                'tipo' => $tipo
-            ]);
+            $query = "SELECT COUNT(*) as count
+                    FROM campionati 
+                    WHERE JSON_UNQUOTE(JSON_EXTRACT(params, '$.stato')) = '$stato' 
+                    AND JSON_UNQUOTE(JSON_EXTRACT(params, '$.livello')) = '$livello';
+                    ";
+            $result = $db->getQueryResult($query)->fetch_assoc();
+            if ($result['count'] > 0) {
+                $error = CAMPIONATO_GIA_CREATO;
+            } else {
 
-            // Query di inserimento dei dati
-            $query = "INSERT INTO campionati (user_id, nome, logo, params) VALUES (?, ?, ?, ?)";
+                // Crea un array con i parametri JSON
+                $params = json_encode([
+                    'stato' => $stato,
+                    'livello' => $livello,
+                    'tipo' => $tipo
+                ]);
 
-            // Parametri per la query
-            $params_db = ['isss', $user_id, $nome, $logo_path, $params];
+                // Query di inserimento dei dati
+                $query = "INSERT INTO campionati (user_id, nome, logo, params) VALUES (?, ?, ?, ?)";
 
-            // Esegui la query preparata
-            $db->executePreparedStatement($query, $params_db);
+                // Parametri per la query
+                $params_db = ['isss', $user_id, $nome, $logo_path, $params];
 
-            $success = CAMPIONATO_CREATO;
-            header("Location: index.php?group=comp&page=campionati");
-            exit();
+                // Esegui la query preparata
+                $db->executePreparedStatement($query, $params_db);
+
+                $success = CAMPIONATO_CREATO;
+                header("Location: index.php?group=comp&page=campionati");
+                exit();
+            }
+
         } else {
             $error = ERRORE_UPLOAD;
         }
@@ -148,23 +160,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
 
 
 <?php
-$query = "SELECT id, nome, logo, params FROM campionati WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY id ASC";
+$query = "SELECT id, nome, logo, params FROM campionati WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY JSON_UNQUOTE(JSON_EXTRACT(params, '$.stato')) ASC, JSON_UNQUOTE(JSON_EXTRACT(params, '$.livello')) ASC, id ASC";
 $campionati = $db->getQueryResult($query);
 ?>
 <h2 class="mt-5 mb-3 text-center"><?php echo LISTA_CAMPIONATI ?></h2>
 <div class="table-responsive">
-    <table class="table table-bordered table-striped text-center">
+    <table class="table table-bordered table-striped text-center" id="ordered-table">
         <thead class="table-dark">
             <tr>
                 <th class="col-1"><?php echo LOGO ?></th>
                 <th class="col-2"><?php echo NOME ?></th>
-                <th class="col-7 text-start"><?php echo DETTAGLI ?></th>
-                <th class="col-2"><?php echo AZIONI ?></th>
+                <th class="col-2"><?php echo TIPO ?></th>
+                <th class="col-2"><?php echo STATO ?></th>
+                <th class="col-2"><?php echo LIVELLO ?></th>
+                <th class="col-3"><?php echo AZIONI ?></th>
             </tr>
         </thead>
         <tbody>
             <?php if (!empty($campionati)): ?>
                 <?php foreach ($campionati as $campionato): ?>
+                    <?php
+                    $params = json_decode($campionato['params'], true);
+                    ?>
                     <tr id="row-<?= $campionato['id'] ?>">
                         <!-- Colonna Logo -->
                         <td class="text-center align-middle">
@@ -174,23 +191,14 @@ $campionati = $db->getQueryResult($query);
                         <!-- Colonna Nome -->
                         <td class="fw-bold align-middle"><?= htmlspecialchars($campionato['nome']) ?></td>
 
-                        <!-- Colonna Dettagli -->
-                        <td class="align-middle text-start">
-                            <?php
-                            $params = json_decode($campionato['params'], true);
-                            if ($params) {
-                                echo "<table>"; // Aggiungi spacing tra le celle
-                                foreach ($params as $key => $value) {
-                                    echo "<tr>";
-                                    echo "<td style='padding-right: 20px;'><strong>" . ucfirst($key) . ":</strong></td>";  // Chiave
-                                    echo "<td>$value</td>";  // Valore
-                                    echo "</tr>";
-                                }
-                                echo "</table>";
-                            }
-                            ?>
-                        </td>
+                        <!-- Colonna Tipo -->
+                        <td class="text-center align-middle"><?= $params['tipo'] ?></td>
 
+                        <!-- Colonna Stato -->
+                        <td class="text-center align-middle"><?= $params['stato'] ?></td>
+
+                        <!-- Colonna Livello -->
+                        <td class="text-center align-middle"><?= $params['livello'] ?></td>
 
                         <!-- Colonna Azione -->
                         <td class="text-center align-middle">

@@ -7,6 +7,7 @@ global $db, $lang;
 $db = new Database();
 $conn = $db->getConnection();
 checkCreateTable($conn);
+checkImages();
 // Imposta la lingua scelta dall'utente o usa quella di default
 if (isset($_POST['lingua'])) {
     $_SESSION['lang'] = $_POST['lingua'];

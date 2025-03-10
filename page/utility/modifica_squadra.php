@@ -12,19 +12,22 @@ if (isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_squadra'])) {
     $colore1 = $_POST['colore1'] ?? '#000000';
     $colore2 = $_POST['colore2'] ?? '#ffffff';
+    $colore3 = $_POST['colore3'] ?? '#000000';
     $valore = $_POST['valore'] ?? 0;
+    $nome = $_POST['nome'] ?? '';
 
     $campionato = $_POST['campionato'] ?? '';
     // Crea un array con i parametri JSON
     $params = json_encode([
         'colore1' => $colore1,
         'colore2' => $colore2,
+        'colore3' => $colore3,
         'valore' => $valore
     ]);
 
-    $query = "UPDATE squadre SET params = ?, campionato_id = ? WHERE id = ?";
+    $query = "UPDATE squadre SET nome = ?, params = ?, campionato_id = ? WHERE id = ?";
     // Parametri per la query
-    $params_db = ['sii', $params, $campionato, $id];
+    $params_db = ['ssii', $nome, $params, $campionato, $id];
 
     // Esegui la query preparata
     $db->executePreparedStatement($query, $params_db);
@@ -58,7 +61,7 @@ $campionati = $db->getQueryResult($query);
                             <!-- Nome della squadra -->
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo NOME ?></label>
-                                <input type="text" class="form-control" value="<?= $row['nome'] ?>" disabled>
+                                <input type="text" class="form-control" name="nome" value="<?= $row['nome'] ?>">
                             </div>
 
                             <!-- Campionato -->
@@ -90,19 +93,25 @@ $campionati = $db->getQueryResult($query);
                             </div>
 
                             <!-- Colore 1 della squadra -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE1 ?></label>
                                 <input type="color" class="form-control" name="colore1" value="<?= $params['colore1'] ?>">
                             </div>
 
                             <!-- Colore 2 della squadra -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE2 ?></label>
                                 <input type="color" class="form-control" name="colore2" value="<?= $params['colore2'] ?>">
                             </div>
 
+                            <!-- Colore 3 della squadra -->
+                            <div class="col-md-3">
+                                <label class="form-label"><?php echo COLORE3 ?></label>
+                                <input type="color" class="form-control" name="colore3" value="<?= $params['colore3'] ?>">
+                            </div>
+
                             <!-- Valore della squadra -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label"><?php echo VALORE ?></label>
                                 <input type="number" class="form-control" name="valore" value="<?= $params['valore'] ?>">
                             </div>

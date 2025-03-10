@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
     $nome = $_POST['nome'] ?? '';
     $colore1 = $_POST['colore1'] ?? '#000000';
     $colore2 = $_POST['colore2'] ?? '#ffffff';
+    $colore3 = $_POST['colore3'] ?? '#000000';
     $valore = $_POST['valore'] ?? 0;
     $campionato = $_POST['campionato'] ?? '';
     $user_id = $_SESSION['user_id']; // L'ID dell'utente loggato
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crea_campionato'])) {
             $params = json_encode([
                 'colore1' => $colore1,
                 'colore2' => $colore2,
+                'colore3' => $colore3,
                 'valore' => $valore
             ]);
 
@@ -119,19 +121,25 @@ $campionati = $db->getQueryResult($query);  // Eseguiamo la query e otteniamo i 
                             </div>
 
                             <!-- Colore 1 della squadra -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE1 ?></label>
                                 <input type="color" class="form-control" name="colore1" value="#000000">
                             </div>
 
                             <!-- Colore 2 della squadra -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE2 ?></label>
                                 <input type="color" class="form-control" name="colore2" value="#ffffff">
                             </div>
 
+                            <!-- Colore 3 della squadra -->
+                            <div class="col-md-3">
+                                <label class="form-label"><?php echo COLORE3 ?></label>
+                                <input type="color" class="form-control" name="colore3" value="#000000">
+                            </div>
+
                             <!-- Valore della squadra -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label"><?php echo VALORE ?></label>
                                 <input type="number" class="form-control" name="valore" value="0">
                             </div>
@@ -158,26 +166,32 @@ $query = "
     FROM squadre
     JOIN campionati ON squadre.campionato_id = campionati.id
     WHERE squadre.user_id = " . intval($_SESSION['user_id']) . " 
-    ORDER BY squadre.id ASC
+    ORDER BY squadre.campionato_id ASC, JSON_UNQUOTE(JSON_EXTRACT(squadre.params, '$.valore')) ASC, squadre.id ASC
 ";
 $squadre = $db->getQueryResult($query);
 ?>
 
 <h2 class="mt-5 mb-3 text-center"><?php echo LISTA_CAMPIONATI ?></h2>
 <div class="table-responsive">
-    <table class="table table-bordered table-striped text-center">
+    <table class="table table-bordered table-striped text-center" id="ordered-table">
         <thead class="table-dark">
             <tr>
                 <th class="col-1"><?php echo LOGO ?></th>
                 <th class="col-2"><?php echo NOME ?></th>
                 <th class="col-2"><?php echo CAMPIONATO ?></th>
-                <th class="col-5 text-start"><?php echo DETTAGLI ?></th>
-                <th class="col-2"><?php echo AZIONI ?></th>
+                <th class="col-2"><?php echo VALORE." (Mln)" ?></th>
+                <th class="col-5"><?php echo AZIONI ?></th>
             </tr>
         </thead>
         <tbody>
             <?php if (!empty($squadre)): ?>
                 <?php foreach ($squadre as $squadra): ?>
+                    <?php
+                    $params = json_decode($squadra['params'], true);
+                    $colore1 = $params['colore1'] ?? '#000000';
+                    $colore2 = $params['colore2'] ?? '#ffffff';
+                    $colore3 = $params['colore3'] ?? '#000000';
+                    ?>
                     <tr id="row-<?= $squadra['id'] ?>">
                         <!-- Colonna Logo -->
                         <td class="text-center align-middle">
@@ -185,34 +199,18 @@ $squadre = $db->getQueryResult($query);
                         </td>
 
                         <!-- Colonna Nome -->
-                        <td class="fw-bold align-middle"><?= htmlspecialchars($squadra['squadra_nome']) ?></td>
+                        <td class="fw-bold align-middle">
+                            <div style="background-color: <?php echo $colore1 ?>; color: <?php echo $colore2 ?>; border: 5px solid <?php echo $colore3 ?>;"
+                                class="rounded-pill p-2">
+                            <?= htmlspecialchars($squadra['squadra_nome']) ?>
+                            </div>
+                        </td>
 
                         <!-- Colonna Campionato -->
                         <td class="fw-bold align-middle"><?= htmlspecialchars($squadra['campionato_nome']) ?></td>
 
-                        <!-- Colonna Dettagli -->
-                        <td class="align-middle text-start">
-                            <?php
-                            $params = json_decode($squadra['params'], true);
-                            if ($params) {
-                                echo "<table>";
-                                foreach ($params as $key => $value) {
-                                    // Aggiungi una riga per ogni chiave e valore
-                                    echo "<tr>";
-                                    echo "<td style='padding-right: 20px;'><strong>" . ucfirst($key) . ":</strong></td>";
-                                    if ($key === 'colore1' || $key === 'colore2') {
-                                        // Se il valore è un colore, visualizzalo come input di tipo 'color'
-                                        echo "<td><input type='color' value='$value' disabled></td>";
-                                    } else {
-                                        // Altrimenti, mostra il valore come testo
-                                        echo "<td>$value</td>";
-                                    }
-                                    echo "</tr>";
-                                }
-                                echo "</table>";
-                            }
-                            ?>
-                        </td>
+                        <!-- Colonna Valore -->
+                        <td class="align-middle"><?php echo $params['valore']; ?></td>
 
                         <!-- Colonna Azione -->
                         <td class="text-center align-middle">

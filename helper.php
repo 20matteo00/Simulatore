@@ -1,12 +1,13 @@
 <?php // helper.php
 // Definisci le variabili globali per il file di creazione tabelle, log, e cache
-global $sql_create, $cache_checkcreate, $log_create, $log_error;
+global $sql_create, $cache_checkcreate, $log_create, $log_error, $log_images;
 
 // Imposta i valori delle variabili
 $sql_create = "sql/create.sql"; // File di creazione tabelle
 $cache_checkcreate = 'cache/checkcreate.txt'; // File di cache per controllare la creazione delle tabelle
 $log_create = 'log/create.txt'; // File di log per la creazione delle tabelle
 $log_error = 'log/error.txt'; //File di log di errori generico
+$log_images = 'log/images.txt'; //File di log per la gestione delle immagini
 
 // Funzione per controllare e creare la tabella, e registrare la creazione nel file di cache e nel log
 function checkCreateTable($conn)
@@ -33,6 +34,55 @@ function checkCreateTable($conn)
     } else {
         // In caso di errore, scrivi nel log
         logMessage($log_create, "Errore nell'esecuzione del file SQL: " . $conn->error);
+    }
+}
+
+function checkImages()
+{
+    global $db, $log_images;
+
+    // Query unica per recuperare i loghi sia dalla tabella squadre che dalla tabella campionati
+    $query = "
+        SELECT user_id, logo, 'squadra' AS tipo FROM squadre
+        UNION ALL
+        SELECT user_id, logo, 'campionato' AS tipo FROM campionati
+    ";
+    $loghi = $db->getQueryResult($query);
+
+    // Array per memorizzare i loghi in uso
+    $loghi_in_uso = [];
+
+    // Aggiungi tutti i loghi in uso all'array (correggi il percorso)
+    foreach ($loghi as $logo) {
+        $user_id = $logo['user_id'];
+        $tipo = $logo['tipo'];
+        $logo_file = $logo['logo'];
+
+        // Crea il percorso corretto, senza duplicazioni
+        $loghi_in_uso[] = "$logo_file";
+    }
+
+    // Recupera tutti i file immagine dal filesystem (sia da "squadre" che da "campionati")
+    $percorso_base = "images";  // Base per i percorsi
+
+    // Recupera i file immagine dal filesystem (sia da "squadre" che da "campionati")
+    foreach (['squadre', 'campionati'] as $tipo) {
+        // Cerca in tutte le cartelle degli utenti
+        $percorso_loghi = $percorso_base . "/*/$tipo";
+
+        // Recupera tutti i file immagine dal filesystem
+        $immagini_files = glob($percorso_loghi . '/*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+
+        foreach ($immagini_files as $immagine) {
+            // Verifica se il file immagine è in uso (deve essere presente nell'array $loghi_in_uso)
+            if (!in_array($immagine, $loghi_in_uso)) {
+                // Se non è in uso, elimina il file
+                if (file_exists($immagine)) {
+                    unlink($immagine);  // Elimina il file
+                    logMessage($log_images, "File immagine eliminato: $immagine");
+                }
+            }
+        }
     }
 }
 

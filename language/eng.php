@@ -45,6 +45,7 @@ define("CREAZIONE_SQUADRE", "Create Teams");
 define("CAMPIONATO", "League");
 define("COLORE1", "Color 1");
 define("COLORE2", "Color 2");
+define("COLORE3", "Color 3");
 define("VALORE", "Value");
 define("CREA_SQUADRA", "Create Team");
 define("MODIFICA_SQUADRA", "Edit Team");
@@ -76,6 +77,7 @@ define("FORMATO_LOGO_NON_CONSENTITO", "Logo format not allowed");
 define("ERRORE_UPLOAD", "Error uploading file");
 define("LOGO_NON_VALIDO", "Invalid logo");
 define("CAMPIONATO_NON_ELIMINABILE", "League cannot be deleted");
+define("CAMPIONATO_GIA_CREATO", "League already created");
 
 // Successo
 define("REGISTRAZIONE_AVVENUTA", "Registration successful");

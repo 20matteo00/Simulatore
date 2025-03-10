@@ -45,6 +45,7 @@ define("CREAZIONE_SQUADRE", "Creazione Squadre");
 define("CAMPIONATO", "Campionato");
 define("COLORE1", "Colore 1");
 define("COLORE2", "Colore 2");
+define("COLORE3", "Colore 3");
 define("VALORE", "Valore");
 define("CREA_SQUADRA", "Crea Squadra");
 define("MODIFICA_SQUADRA", "Modifica Squadra");
@@ -76,6 +77,7 @@ define("FORMATO_LOGO_NON_CONSENTITO", "Formato del logo non consentito");
 define("ERRORE_UPLOAD", "Errore durante l'upload del file");
 define("LOGO_NON_VALIDO", "Logo non valido");
 define("CAMPIONATO_NON_ELIMINABILE", "Impossibile eliminare il campionato: ci sono squadre associate");
+define("CAMPIONATO_GIA_CREATO", "Campionato già creato");
 
 // Successo
 define("REGISTRAZIONE_AVVENUTA", "Registrazione avvenuta con successo");

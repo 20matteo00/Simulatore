@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
     $stato = $_POST['stato'] ?? '';
     $livello = $_POST['livello'] ?? '';
     $tipo = $_POST['tipo'] ?? '';
+    $nome = $_POST['nome'] ?? '';
 
     // Crea un array con i parametri JSON
     $params = json_encode([
@@ -22,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
         'tipo' => $tipo
     ]);
 
-    $query = "UPDATE campionati SET params = ? WHERE id = ?";
+    $query = "UPDATE campionati SET nome = ?, params = ? WHERE id = ?";
     // Parametri per la query
-    $params_db = ['si', $params, $id];
+    $params_db = ['ssi', $nome, $params, $id];
 
     // Esegui la query preparata
     $db->executePreparedStatement($query, $params_db);
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
                             <!-- Nome del campionato -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo NOME ?></label>
-                                <input type="text" class="form-control" value="<?= $row['nome'] ?>" disabled>
+                                <input type="text" class="form-control" name="nome" value="<?= $row['nome'] ?>">
                             </div>
 
                             <!-- Logo del campionato -->
