@@ -202,7 +202,7 @@ $squadre = $db->getQueryResult($query);
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="<?php echo $colspan; ?>" class="text-center text-muted"><?php echo NESSUN_CAMPIONATO ?>
+                    <td colspan="<?php echo $colspan; ?>" class="text-center text-muted"><?php echo NESSUNA_SQUADRA ?>
                     </td>
                 </tr>
             <?php endif; ?>

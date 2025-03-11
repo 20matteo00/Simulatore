@@ -78,46 +78,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['invia'])) {
                             <!-- Username -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo NOME_UTENTE ?></label>
-                                <input type="text" class="form-control" name="username" value="<?= $_SESSION['username'] ?? '' ?>" required>
+                                <input type="text" class="form-control" name="username"
+                                    value="<?= $_SESSION['username'] ?? '' ?>" required>
                             </div>
 
                             <!-- Email -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo EMAIL ?></label>
-                                <input type="email" class="form-control" name="email" value="<?= $_SESSION['email'] ?? '' ?>" required>
+                                <input type="email" class="form-control" name="email"
+                                    value="<?= $_SESSION['email'] ?? '' ?>" required>
                             </div>
 
                             <!-- Nome -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo NOME ?></label>
-                                <input type="text" class="form-control" name="nome" value="<?= $anagrafica['nome'] ?? '' ?>">
+                                <input type="text" class="form-control" name="nome"
+                                    value="<?= $anagrafica['nome'] ?? '' ?>">
                             </div>
 
                             <!-- Cognome -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo COGNOME ?></label>
-                                <input type="text" class="form-control" name="cognome" value="<?= $anagrafica['cognome'] ?? '' ?>">
+                                <input type="text" class="form-control" name="cognome"
+                                    value="<?= $anagrafica['cognome'] ?? '' ?>">
                             </div>
 
                             <!-- Data di Nascita -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo DATA_NASCITA ?></label>
-                                <input type="date" class="form-control" name="data_nascita" value="<?= $anagrafica['data_nascita'] ?? '' ?>">
+                                <input type="date" class="form-control" name="data_nascita"
+                                    value="<?= $anagrafica['data_nascita'] ?? '' ?>">
                             </div>
 
                             <!-- Luogo di Nascita -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo LUOGO_NASCITA ?></label>
-                                <input type="text" class="form-control" name="luogo_nascita" value="<?= $anagrafica['luogo_nascita'] ?? '' ?>">
+                                <input type="text" class="form-control" name="luogo_nascita"
+                                    value="<?= $anagrafica['luogo_nascita'] ?? '' ?>">
                             </div>
 
                             <!-- Telefono -->
                             <div class="col-md-6">
                                 <label class="form-label"><?php echo TELEFONO ?></label>
-                                <input type="text" class="form-control" name="telefono" value="<?= $anagrafica['telefono'] ?? '' ?>">
+                                <input type="tel" class="form-control" name="telefono"
+                                    value="<?= $anagrafica['telefono'] ?? '' ?>"
+                                    pattern="^\+?[0-9]{1,4}?[ ]?([0-9]{1,4}[ ]?){2,4}$" placeholder="+39 123 4567890">
                             </div>
+
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-4" name="invia"><?php echo AGGIORNA_PROFILO ?></button>
+                        <button type="submit" class="btn btn-primary w-100 mt-4"
+                            name="invia"><?php echo AGGIORNA_PROFILO ?></button>
                     </form>
                 </div>
             </div>

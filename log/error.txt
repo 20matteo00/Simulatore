@@ -31,3 +31,8 @@
 [2025-03-11 08:14:49] - Errore: Il file 'page/login/modifica_squadra.php' non esiste.
 [2025-03-11 09:12:33] - Errore: Il file 'page/login/squadre.php' non esiste.
 [2025-03-11 09:32:36] - Errore: Il file 'page/login/campionati.php' non esiste.
+[2025-03-11 11:57:55] - Errore: Il file 'page/utility/elimina_competizione.php' non esiste.
+[2025-03-11 12:10:25] - Errore: Il file 'page/utility/elimina_competizione.php' non esiste.
+[2025-03-11 12:29:17] - Errore: Il file 'page/utility/modifica_competizione.php' non esiste.
+[2025-03-11 12:33:54] - Errore: Il file 'page/utility/visualizza_competizione.php' non esiste.
+[2025-03-11 12:34:12] - Errore: Il file 'page/utility/visualizza_competizione.php' non esiste.

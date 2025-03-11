@@ -51,15 +51,23 @@ define("VALORE", "Valore");
 define("CREA_SQUADRA", "Crea Squadra");
 define("MODIFICA_SQUADRA", "Modifica Squadra");
 
+// Form (competizione)
+define("CREAZIONE_COMPETIZIONE", "Creazione Competizione");
+define("CREA_COMPETIZIONE", "Crea Competizione");
+
 // Campionati
 define("LISTA_CAMPIONATI", "Lista Campionati");
 define("DETTAGLI", "Dettagli");
 define("AZIONI", "Azioni");
 define("MODIFICA", "Modifica");
 define("ELIMINA", "Elimina");
+define("VISUALIZZA", "Visualizza");
 
 // Squadre
 define("LISTA_SQUADRE", "Lista Squadre");
+
+// Competizioni
+define("LISTA_COMPETIZIONI", "Lista Competizioni");
 
 // Info
 define("HAI_GIA_UN_ACCOUNT", "Hai già un account?");
@@ -74,6 +82,8 @@ define("UTENTE_NON_TROVATO", "Utente non trovato");
 define("PASSWORD_ERRATA", "Password errata");
 define("PASSWORD_DIMENTICATA", "Password dimenticata?");
 define("NESSUN_CAMPIONATO", "Nessun campionato trovato");
+define("NESSUNA_SQUADRA", "Nessuna squadra trovata");
+define('NESSUNA_COMPETIZIONE', 'Nessuna competizione trovata');
 define("FORMATO_LOGO_NON_CONSENTITO", "Formato del logo non consentito");
 define("ERRORE_UPLOAD", "Errore durante l'upload del file");
 define("LOGO_NON_VALIDO", "Logo non valido");
@@ -91,4 +101,6 @@ define("CAMPIONATO_ELIMINATO", "Campionato eliminato con successo");
 define("SQUADRA_CREATA", "Squadra creata con successo");
 define("SQUADRA_MODIFICATA", "Squadra modificata con successo");
 define("SQUADRA_ELIMINATA", "Squadra eliminata con successo");
+define("COMPETIZIONE_CREATA", "Competizione creata con successo");
+define("COMPETIZIONE_ELIMINATA", "Competizione eliminata con successo");
 ?>
