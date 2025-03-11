@@ -41,7 +41,7 @@ if ($result) {
         ];
     }
     ?>
-    <div class="container mt-4 classifica">
+    <div class="container mt-4 home">
         <div class="row g-4">
             <?php foreach ($campionati as $campionato): ?>
                 <div class="col">

@@ -39,3 +39,4 @@
 [2025-03-11 13:14:16] - Errore: Il file 'page/view/classifica.php' non esiste.
 [2025-03-11 13:14:19] - Errore: Il file 'page/view/classifica.php' non esiste.
 [2025-03-11 13:19:52] - Errore: Il file 'page/login/competizioni.php' non esiste.
+[2025-03-11 15:00:00] - Errore: Il file 'page/login/campionati.php' non esiste.
