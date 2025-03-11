@@ -7,7 +7,7 @@ global $db, $lang;
 $db = new Database();
 $conn = $db->getConnection();
 checkCreateTable($conn);
-checkImages();
+/* checkImages(); */
 // Imposta la lingua scelta dall'utente o usa quella di default
 if (isset($_POST['lingua'])) {
     $_SESSION['lang'] = $_POST['lingua'];
@@ -19,12 +19,15 @@ if (!file_exists("language/$lang.php")) {
 }
 include "language/$lang.php";
 $page = "home";
-$group = "home";
+if (!isset($_SESSION['username'])) {
+    $group = "login";
+} else {
+    if (isset($_GET['group'])) {
+        $group = $_GET['group'];
+    }
+}
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
-}
-if (isset($_GET['group'])) {
-    $group = $_GET['group'];
 }
 $pageFile = 'page/' . $group . "/" . $page . '.php';
 ?>

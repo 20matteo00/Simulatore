@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['invia'])) {
             $success = REGISTRAZIONE_AVVENUTA;
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
+            $_SESSION['role'] = 0;
             $_SESSION['user_id'] = $db->getQueryResult("SELECT id FROM utenti WHERE email = '" . $_SESSION['email'] . "'")->fetch_assoc()['id'];
             // Reindirizza alla pagina di login
             header("Location: index.php?group=login&page=profile");

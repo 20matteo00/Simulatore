@@ -1,5 +1,10 @@
 <?php
 global $db;
+if($_SESSION['role'] === 0){
+    header("Location: index.php?group=comp&page=squadre");
+    exit();
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * FROM squadre WHERE id = $id";
@@ -15,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_squadra'])) 
     $colore3 = $_POST['colore3'] ?? '#000000';
     $valore = $_POST['valore'] ?? 0;
     $nome = $_POST['nome'] ?? '';
+    $logo = $_POST['logo'] ?? '';
 
     $campionato = $_POST['campionato'] ?? '';
     // Crea un array con i parametri JSON
@@ -25,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_squadra'])) 
         'valore' => $valore
     ]);
 
-    $query = "UPDATE squadre SET nome = ?, params = ?, campionato_id = ? WHERE id = ?";
+    $query = "UPDATE squadre SET nome = ?, logo = ?, params = ?, campionato_id = ? WHERE id = ?";
     // Parametri per la query
-    $params_db = ['ssii', $nome, $params, $campionato, $id];
+    $params_db = ['sssii', $nome, $logo, $params, $campionato, $id];
 
     // Esegui la query preparata
     $db->executePreparedStatement($query, $params_db);
@@ -37,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_squadra'])) 
     exit();
 }
 
-$query = "SELECT id, nome, logo, params FROM campionati WHERE user_id = ".$_SESSION['user_id']." ORDER BY id ASC";
+$query = "SELECT id, nome, logo, params FROM campionati ORDER BY id ASC";
 $campionati = $db->getQueryResult($query);
 ?>
 <div class="container mt-5">
@@ -90,30 +96,37 @@ $campionati = $db->getQueryResult($query);
                                             class="form-control img-thumbnail myimg" width="100">
                                     </div>
                                 <?php endif; ?>
+                                <label class="form-label"><?php echo LOGO ?></label>
+                                <input type="text" class="form-control" name="logo" value="<?= $row['logo'] ?>"
+                                    required>
                             </div>
 
                             <!-- Colore 1 della squadra -->
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE1 ?></label>
-                                <input type="color" class="form-control" name="colore1" value="<?= $params['colore1'] ?>">
+                                <input type="color" class="form-control" name="colore1"
+                                    value="<?= $params['colore1'] ?>">
                             </div>
 
                             <!-- Colore 2 della squadra -->
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE2 ?></label>
-                                <input type="color" class="form-control" name="colore2" value="<?= $params['colore2'] ?>">
+                                <input type="color" class="form-control" name="colore2"
+                                    value="<?= $params['colore2'] ?>">
                             </div>
 
                             <!-- Colore 3 della squadra -->
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo COLORE3 ?></label>
-                                <input type="color" class="form-control" name="colore3" value="<?= $params['colore3'] ?>">
+                                <input type="color" class="form-control" name="colore3"
+                                    value="<?= $params['colore3'] ?>">
                             </div>
 
                             <!-- Valore della squadra -->
                             <div class="col-md-3">
                                 <label class="form-label"><?php echo VALORE ?></label>
-                                <input type="number" class="form-control" name="valore" value="<?= $params['valore'] ?>">
+                                <input type="number" class="form-control" name="valore"
+                                    value="<?= $params['valore'] ?>">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary w-100 mt-4"

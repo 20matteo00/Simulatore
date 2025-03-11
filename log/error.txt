@@ -21,3 +21,12 @@
 [2025-03-08 14:29:14] - Errore: Il file 'page/comp/comp.php' non esiste.
 [2025-03-08 14:29:15] - Errore: Il file 'page/comp/comp.php' non esiste.
 [2025-03-08 14:32:58] - Errore: Il file 'page/comp/comp.php' non esiste.
+[2025-03-11 07:30:16] - Errore: Il file 'page/login/.php' non esiste.
+[2025-03-11 07:30:18] - Errore: Il file 'page/login/.php' non esiste.
+[2025-03-11 07:30:20] - Errore: Il file 'page/login/.php' non esiste.
+[2025-03-11 07:30:21] - Errore: Il file 'page/login/.php' non esiste.
+[2025-03-11 07:30:21] - Errore: Il file 'page/login/.php' non esiste.
+[2025-03-11 07:30:23] - Errore: Il file 'page/login/.php' non esiste.
+[2025-03-11 07:31:10] - Errore: Il file 'page/login/squadre.php' non esiste.
+[2025-03-11 08:14:49] - Errore: Il file 'page/login/modifica_squadra.php' non esiste.
+[2025-03-11 09:12:33] - Errore: Il file 'page/login/squadre.php' non esiste.

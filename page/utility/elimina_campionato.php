@@ -1,6 +1,6 @@
 <?php
 global $db;
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && $_SESSION['role'] === 1) {
     $id = $_GET['id'];
 
     // Verifica se il campionato ha delle squadre associate

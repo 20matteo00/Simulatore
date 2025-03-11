@@ -37,6 +37,7 @@ define("LOGO", "Logo");
 define("STATO", "State");
 define("LIVELLO", "Level");
 define("TIPO", "Type");
+define("PARTECIPANTI", "Participants");
 define("CREA_CAMPIONATO", "Create League");
 define("MODIFICA_CAMPIONATO", "Edit League");
 

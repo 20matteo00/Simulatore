@@ -1,5 +1,10 @@
 <?php
 global $db;
+if($_SESSION['role'] === 0){
+    header("Location: index.php?group=comp&page=campionati");
+    exit();
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * FROM campionati WHERE id = $id";
@@ -15,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
     $livello = $_POST['livello'] ?? '';
     $tipo = $_POST['tipo'] ?? '';
     $nome = $_POST['nome'] ?? '';
+    $logo = $_POST['logo'] ?? '';
 
     // Crea un array con i parametri JSON
     $params = json_encode([
@@ -23,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
         'tipo' => $tipo
     ]);
 
-    $query = "UPDATE campionati SET nome = ?, params = ? WHERE id = ?";
+    $query = "UPDATE campionati SET nome = ?, logo = ?, params = ? WHERE id = ?";
     // Parametri per la query
-    $params_db = ['ssi', $nome, $params, $id];
+    $params_db = ['sssi', $nome, $logo, $params, $id];
 
     // Esegui la query preparata
     $db->executePreparedStatement($query, $params_db);
@@ -69,6 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
                                             class="form-control img-thumbnail myimg" width="100">
                                     </div>
                                 <?php endif; ?>
+                                <label class="form-label"><?php echo LOGO ?></label>
+                                <input type="text" class="form-control" name="logo" value="<?= $row['logo'] ?>" required>
+
                             </div>
 
                             <!-- Stato del campionato -->
@@ -111,8 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modifica_campionato']
                             <div class="col-md-4">
                                 <label class="form-label"><?php echo TIPO ?></label>
                                 <select class="form-control" name="tipo" id="tipo">
-                                    <option value="Campionato" <?php if($params['tipo']=="Campionato") echo "selected"; ?>>Campionato</option>
-                                    <option value="Coppa" <?php if($params['tipo']=="Coppa") echo "selected"; ?>>Coppa</option>
+                                    <option value="Campionato" <?php if ($params['tipo'] == "Campionato")
+                                        echo "selected"; ?>>Campionato</option>
+                                    <option value="Coppa" <?php if ($params['tipo'] == "Coppa")
+                                        echo "selected"; ?>>Coppa
+                                    </option>
                                 </select>
                             </div>
                         </div>

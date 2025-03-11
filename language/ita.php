@@ -37,6 +37,7 @@ define("LOGO", "Logo");
 define("STATO", "Stato");
 define("LIVELLO", "Livello");
 define("TIPO", "Tipo");
+define("PARTECIPANTI", "Partecipanti");
 define("CREA_CAMPIONATO", "Crea Campionato");
 define("MODIFICA_CAMPIONATO", "Modifica Campionato");
 

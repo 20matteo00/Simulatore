@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
     `email` VARCHAR(100) NOT NULL,               -- Email
     `password` VARCHAR(255) NOT NULL,            -- Password
     `params` JSON NOT NULL,                      -- JSON con parametri generali
+    `role` INT NOT NULL DEFAULT 0,               -- INT con il ruolo (0 = utente, 1 = admin)
     `data_creazione` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Data creazione
     `data_ultimo_accesso` DATETIME DEFAULT NULL, -- Data ultimo accesso
     PRIMARY KEY (`id`)                           -- La chiave primaria
@@ -27,25 +28,21 @@ CREATE TABLE IF NOT EXISTS `competizioni` (
 -- Tabella campionati con data creazione e data ultimo update
 CREATE TABLE IF NOT EXISTS `campionati` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,         -- ID del campionato
-    `user_id` INT(11) NOT NULL,                   -- ID dell'utente che crea il campionato (chiave esterna)
     `nome` VARCHAR(255) NOT NULL,                  -- Nome del campionato
     `logo` VARCHAR(255) NOT NULL,                  -- URL del logo del campionato
     `params` JSON NOT NULL,                        -- JSON con parametri generali del campionato
     `data_creazione` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Data creazione
-    PRIMARY KEY (`id`),                            -- La chiave primaria
-    FOREIGN KEY (`user_id`) REFERENCES `utenti`(`id`) ON DELETE CASCADE -- Relazione con la tabella utenti
+    PRIMARY KEY (`id`)                             -- La chiave primaria
 );
 
 -- Tabella squadre con data creazione e data ultimo update
 CREATE TABLE IF NOT EXISTS `squadre` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,         -- ID della squadra
-    `user_id` INT(11) NOT NULL,                   -- ID dell'utente che crea la squadra (chiave esterna)
     `nome` VARCHAR(255) NOT NULL,                  -- Nome della squadra
     `logo` VARCHAR(255) NOT NULL,                  -- URL del logo della squadra
     `params` JSON NOT NULL,                        -- JSON con parametri generali della squadra
     `campionato_id` INT(11) NOT NULL,              -- ID del campionato a cui la squadra appartiene (chiave esterna)
     `data_creazione` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Data creazione
     PRIMARY KEY (`id`),                            -- La chiave primaria
-    FOREIGN KEY (`user_id`) REFERENCES `utenti`(`id`) ON DELETE CASCADE,  -- Relazione con la tabella utenti
     FOREIGN KEY (`campionato_id`) REFERENCES `campionati`(`id`) ON DELETE CASCADE  -- Relazione con la tabella campionati
 );
