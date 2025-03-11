@@ -36,3 +36,6 @@
 [2025-03-11 12:29:17] - Errore: Il file 'page/utility/modifica_competizione.php' non esiste.
 [2025-03-11 12:33:54] - Errore: Il file 'page/utility/visualizza_competizione.php' non esiste.
 [2025-03-11 12:34:12] - Errore: Il file 'page/utility/visualizza_competizione.php' non esiste.
+[2025-03-11 13:14:16] - Errore: Il file 'page/view/classifica.php' non esiste.
+[2025-03-11 13:14:19] - Errore: Il file 'page/view/classifica.php' non esiste.
+[2025-03-11 13:19:52] - Errore: Il file 'page/login/competizioni.php' non esiste.

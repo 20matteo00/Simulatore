@@ -69,6 +69,7 @@ define("LISTA_SQUADRE", "Lista Squadre");
 
 // Competizioni
 define("LISTA_COMPETIZIONI", "Lista Competizioni");
+define('HOME', 'Casa');
 define("CALENDARIO", "Calendario");
 define("CLASSIFICA", "Classifica");
 define("TABELLONE", "Tabellone");
