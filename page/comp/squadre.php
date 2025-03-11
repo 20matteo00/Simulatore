@@ -139,7 +139,7 @@ $query = "
 $squadre = $db->getQueryResult($query);
 ?>
 
-<h2 class="mt-5 mb-3 text-center"><?php echo LISTA_CAMPIONATI ?></h2>
+<h2 class="mt-5 mb-3 text-center"><?php echo LISTA_SQUADRE ?></h2>
 <div class="table-responsive">
     <table class="table table-bordered table-striped text-center" id="ordered-table">
         <thead class="table-dark">
