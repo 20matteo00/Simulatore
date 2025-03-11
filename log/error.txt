@@ -30,3 +30,4 @@
 [2025-03-11 07:31:10] - Errore: Il file 'page/login/squadre.php' non esiste.
 [2025-03-11 08:14:49] - Errore: Il file 'page/login/modifica_squadra.php' non esiste.
 [2025-03-11 09:12:33] - Errore: Il file 'page/login/squadre.php' non esiste.
+[2025-03-11 09:32:36] - Errore: Il file 'page/login/campionati.php' non esiste.

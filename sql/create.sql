@@ -15,8 +15,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
 CREATE TABLE IF NOT EXISTS `competizioni` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,            -- ID auto-incrementale
     `user_id` INT(11) NOT NULL,                      -- ID dell'utente che crea la competizione (chiave esterna)
-    `nome` VARCHAR(255) NOT NULL,                     -- Nome della competizione
-    `squadre` JSON NOT NULL,                         -- JSON con i numeri delle squadre
+    `nome` VARCHAR(255) NOT NULL,                    -- Nome della competizione
     `params` JSON NOT NULL,                          -- JSON con parametri generali
     `statistiche` JSON NOT NULL,                     -- JSON con statistiche (vittorie, pareggi, sconfitte, ecc.)
     `partite` JSON NOT NULL,                         -- JSON con i dati delle partite
