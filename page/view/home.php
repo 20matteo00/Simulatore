@@ -1,4 +1,10 @@
 <?php
+global $db;
+$query = "SELECT JSON_UNQUOTE(JSON_EXTRACT(params, '$.tipo')) as tipo, JSON_UNQUOTE(JSON_EXTRACT(params, '$.stato')) as stato FROM competizioni WHERE id = " . $_GET['id'];
+$result = $db->getQueryResult($query);
+$r = $result->fetch_assoc();
+$tipo = $r['tipo'];
+$stato = $r['stato'];
 // Esegui la query per ottenere campionati e squadre
 $query = "
     SELECT 
@@ -11,8 +17,8 @@ $query = "
     FROM 
         campionati c
     JOIN 
-        competizioni cp ON JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.tipo')) = 'Campionato' 
-                      AND JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.stato')) = 'Italia'
+        competizioni cp ON JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.tipo')) = '" . $tipo . "'
+                      AND JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.stato')) = '" . $stato . "'
     JOIN 
         squadre s ON s.campionato_id = c.id;
 ";
