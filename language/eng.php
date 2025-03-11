@@ -36,6 +36,7 @@ define("CREAZIONE_CAMPIONATO", "Create League");
 define("LOGO", "Logo");
 define("STATO", "State");
 define("LIVELLO", "Level");
+define("LIVELLI", "Levels");
 define("TIPO", "Type");
 define("PARTECIPANTI", "Participants");
 define("CREA_CAMPIONATO", "Create League");
@@ -68,6 +69,10 @@ define("LISTA_SQUADRE", "Team List");
 
 // Competizioni
 define("LISTA_COMPETIZIONI", "Competition List");
+define("CALENDARIO", "Calendar");
+define("CLASSIFICA", "Ranking");
+define("TABELLONE", "Brackets");
+define("STATISTICHE", "Statistics");
 
 //Info
 define("HAI_GIA_UN_ACCOUNT", "Already have an account?");

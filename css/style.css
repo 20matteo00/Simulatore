@@ -10,16 +10,23 @@
 }
 
 /*Generale*/
-.myimg{
+.myimg {
   width: 60px;
   height: 60px;
   object-fit: contain;
 }
 
 /*NAVBAR*/
-.navbar-brand{
-    color: var(--bs-danger);
+.navbar-brand {
+  color: var(--bs-danger);
 }
-.nav-link{
-    color: var(--bs-warning);
+.nav-link {
+  color: var(--bs-warning);
+}
+
+/*NAVCOMP*/
+.navcomp {
+  position: absolute;
+  bottom: 0;
+  background-color: transparent;
 }

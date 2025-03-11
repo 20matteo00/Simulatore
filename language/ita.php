@@ -36,6 +36,7 @@ define("CREAZIONE_CAMPIONATO", "Creazione Campionato");
 define("LOGO", "Logo");
 define("STATO", "Stato");
 define("LIVELLO", "Livello");
+define("LIVELLI", "Livelli");
 define("TIPO", "Tipo");
 define("PARTECIPANTI", "Partecipanti");
 define("CREA_CAMPIONATO", "Crea Campionato");
@@ -68,6 +69,10 @@ define("LISTA_SQUADRE", "Lista Squadre");
 
 // Competizioni
 define("LISTA_COMPETIZIONI", "Lista Competizioni");
+define("CALENDARIO", "Calendario");
+define("CLASSIFICA", "Classifica");
+define("TABELLONE", "Tabellone");
+define("STATISTICHE", "Statistiche");
 
 // Info
 define("HAI_GIA_UN_ACCOUNT", "Hai già un account?");

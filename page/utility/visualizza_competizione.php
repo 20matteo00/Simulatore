@@ -1,4 +1,7 @@
 <?php
-echo "Visualizza competizione";
+
+
+include "block/competizioni.php";
 
 ?>
+
