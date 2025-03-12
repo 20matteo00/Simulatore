@@ -74,6 +74,7 @@ define("CALENDARIO", "Calendar");
 define("CLASSIFICA", "Ranking");
 define("TABELLONE", "Brackets");
 define("STATISTICHE", "Statistics");
+define("GIORNATA", "Matchday");
 
 //Info
 define("HAI_GIA_UN_ACCOUNT", "Already have an account?");

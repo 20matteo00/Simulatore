@@ -41,3 +41,4 @@
 [2025-03-11 13:19:52] - Errore: Il file 'page/login/competizioni.php' non esiste.
 [2025-03-11 15:00:00] - Errore: Il file 'page/login/campionati.php' non esiste.
 [2025-03-12 17:00:36] - Errore: Il file 'page/login/campionati.php' non esiste.
+[2025-03-12 21:42:05] - Errore: Il file 'page/login/campionati.php' non esiste.

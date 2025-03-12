@@ -74,6 +74,7 @@ define("CALENDARIO", "Calendario");
 define("CLASSIFICA", "Classifica");
 define("TABELLONE", "Tabellone");
 define("STATISTICHE", "Statistiche");
+define("GIORNATA", "Giornata");
 
 // Info
 define("HAI_GIA_UN_ACCOUNT", "Hai già un account?");
