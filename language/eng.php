@@ -75,6 +75,19 @@ define("CLASSIFICA", "Ranking");
 define("TABELLONE", "Brackets");
 define("STATISTICHE", "Statistics");
 define("GIORNATA", "Matchday");
+define("SQUADRA", "Team");
+define("CASA", "Home");
+define("TRASFERTA", "Away");
+define("VC", "VC");
+define("NC", "NC");
+define("PC", "PC");
+define("GFC", "GFC");
+define("GSC", "GSC");
+define("VT", "VT");
+define("NT", "NT");
+define("PT", "PT");
+define("GFT", "GFT");
+define("GST", "GST");
 
 //Info
 define("HAI_GIA_UN_ACCOUNT", "Already have an account?");

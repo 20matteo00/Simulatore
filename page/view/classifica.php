@@ -24,25 +24,25 @@ if (!isset($_GET['id'])) {
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-hover">
+                                        <table class="table table-striped table-bordered table-hover text-center">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th rowspan="2" class="text-center">#</th>
-                                                    <th rowspan="2" class="text-center">Squadra</th>
-                                                    <th colspan="5" class="text-center">Casa</th>
-                                                    <th colspan="5" class="text-center">Trasferta</th>
+                                                    <th rowspan="2" class="text-center"><?php echo SQUADRA ?></th>
+                                                    <th colspan="5" class="text-center"><?php echo CASA ?></th>
+                                                    <th colspan="5" class="text-center"><?php echo TRASFERTA ?></th>
                                                 </tr>
                                                 <tr>
-                                                    <th>VC</th>
-                                                    <th>NC</th>
-                                                    <th>PC</th>
-                                                    <th>GFC</th>
-                                                    <th>GSC</th>
-                                                    <th>VT</th>
-                                                    <th>NT</th>
-                                                    <th>PT</th>
-                                                    <th>GFT</th>
-                                                    <th>GST</th>
+                                                    <th><?php echo VC ?></th>
+                                                    <th><?php echo NC ?></th>
+                                                    <th><?php echo PC ?></th>
+                                                    <th><?php echo GFC ?></th>
+                                                    <th><?php echo GSC ?></th>
+                                                    <th><?php echo VT ?></th>
+                                                    <th><?php echo NT ?></th>
+                                                    <th><?php echo PT ?></th>
+                                                    <th><?php echo GFT ?></th>
+                                                    <th><?php echo GST ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>

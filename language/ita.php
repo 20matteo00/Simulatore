@@ -75,6 +75,19 @@ define("CLASSIFICA", "Classifica");
 define("TABELLONE", "Tabellone");
 define("STATISTICHE", "Statistiche");
 define("GIORNATA", "Giornata");
+define("SQUADRA", "Squadra");
+define("CASA", "Casa");
+define("TRASFERTA", "Trasferta");
+define("VC", "VC");
+define("NC", "NC");
+define("PC", "PC");
+define("GFC", "GFC");
+define("GSC", "GSC");
+define("VT", "VT");
+define("NT", "NT");
+define("PT", "PT");
+define("GFT", "GFT");
+define("GST", "GST");
 
 // Info
 define("HAI_GIA_UN_ACCOUNT", "Hai già un account?");
