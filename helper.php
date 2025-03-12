@@ -109,6 +109,8 @@ function checkPage($page, $pageFile)
 }
 
 
+/* COMPETIZIONI */
+
 function generaHome()
 {
     global $db;
@@ -277,9 +279,6 @@ function generaPartiteStatistiche($squadre, $var)
     }
 
 }
-
-
-
 
 function getCampionatoNameById($id)
 {

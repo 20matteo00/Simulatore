@@ -6,7 +6,6 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
-$statistiche = checkPartiteStatistiche("statistiche");
 
 ?>
 

@@ -1,5 +1,7 @@
 <?php
 global $db;
+$partite = checkPartiteStatistiche("partite");
+$statistiche = checkPartiteStatistiche("statistiche");
 if (isset($_POST['blockcomp'])) {
     $blockcomp = $_POST['blockcomp'];
     switch ($blockcomp) {
