@@ -108,4 +108,121 @@ function checkPage($page, $pageFile)
     }
 }
 
+function generaCalendario($squadre)
+{
+    shuffle($squadre); // Mescola le squadre
+    $n = count($squadre);
+    // Se il numero di squadre è dispari, aggiungi un dummy (bye) per facilitare l'abbinamento
+    if ($n % 2 != 0) {
+        $squadre[] = null;
+        $n = count($squadre);
+    }
+
+    $giornate = array();
+    $rounds = $n - 1; // numero di giornate per il primo turno (andata)
+    $teams = $squadre; // copia dell'array
+
+    // Genera il calendario per l'andata
+    for ($round = 0; $round < $rounds; $round++) {
+        $matches = array();
+        $matchNumber = 1;
+        // Abbina la prima metà contro la seconda metà
+        for ($i = 0; $i < $n / 2; $i++) {
+            $home = $teams[$i];
+            $away = $teams[$n - 1 - $i];
+            // Se una delle due è "bye" (null) salta la partita
+            if ($home === null || $away === null) {
+                continue;
+            }
+            $matches["partita" . $matchNumber] = array(
+                "squadra1" => $home,
+                "squadra2" => $away,
+                "gol1" => "-",
+                "gol2" => "-"
+            );
+            $matchNumber++;
+        }
+        $giornate["giornata" . ($round + 1)] = $matches;
+
+        // Ruota l'array mantenendo fisso il primo elemento
+        $temp = $teams[1];
+        for ($j = 1; $j < $n - 1; $j++) {
+            $teams[$j] = $teams[$j + 1];
+        }
+        $teams[$n - 1] = $temp;
+    }
+
+    // Genera il ritorno invertendo casa e trasferta per ogni partita
+    $secondHalf = array();
+    $i = 0;
+    foreach ($giornate as $roundName => $matches) {
+        $matchesReverse = array();
+        $matchNumber = 1;
+        foreach ($matches as $match) {
+            $matchesReverse["partita" . $matchNumber] = array(
+                "squadra1" => $match["squadra2"],
+                "squadra2" => $match["squadra1"],
+                "gol1" => "-",
+                "gol2" => "-"
+            );
+            $matchNumber++;
+        }
+        $secondHalf["giornata" . ($rounds + $i + 1)] = $matchesReverse;
+        $i++;
+    }
+
+    // Unisci andata e ritorno
+    $calendario = array_merge($giornate, $secondHalf);
+
+    return json_encode($calendario);
+}
+
+function generaHome()
+{
+    global $db;
+    $query = "SELECT JSON_UNQUOTE(JSON_EXTRACT(params, '$.tipo')) as tipo, JSON_UNQUOTE(JSON_EXTRACT(params, '$.stato')) as stato FROM competizioni WHERE id = " . $_GET['id'];
+    $result = $db->getQueryResult($query);
+    $r = $result->fetch_assoc();
+    $tipo = $r['tipo'];
+    $stato = $r['stato'];
+    // Esegui la query per ottenere campionati e squadre
+    $query = "
+    SELECT 
+        c.id AS campionato_id, 
+        c.nome AS campionato_nome,
+        c.logo AS campionato_logo,
+        s.id AS squadra_id,
+        s.nome AS squadra_nome,
+        s.logo AS squadra_logo
+    FROM 
+        campionati c
+    JOIN 
+        competizioni cp ON JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.tipo')) = '" . $tipo . "'
+                      AND JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.stato')) = '" . $stato . "'
+    JOIN 
+        squadre s ON s.campionato_id = c.id;
+";
+
+    // Supponiamo che $db sia l'oggetto della connessione al database
+    return $db->getQueryResult($query);
+}
+
+function getCampionatoNameById($id)
+{
+    global $db;
+    $query = "SELECT nome FROM campionati WHERE id = $id";
+    $result = $db->getQueryResult($query);
+    $r = $result->fetch_assoc();
+    return $r['nome'];
+}
+
+function getSquadraNameById($id)
+{
+    global $db;
+    $query = "SELECT nome FROM squadre WHERE id = $id";
+    $result = $db->getQueryResult($query);
+    $r = $result->fetch_assoc();
+    return $r['nome'];
+}
+
 ?>

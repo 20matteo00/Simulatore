@@ -1,31 +1,11 @@
 <?php
 global $db;
-$query = "SELECT JSON_UNQUOTE(JSON_EXTRACT(params, '$.tipo')) as tipo, JSON_UNQUOTE(JSON_EXTRACT(params, '$.stato')) as stato FROM competizioni WHERE id = " . $_GET['id'];
-$result = $db->getQueryResult($query);
-$r = $result->fetch_assoc();
-$tipo = $r['tipo'];
-$stato = $r['stato'];
-// Esegui la query per ottenere campionati e squadre
-$query = "
-    SELECT 
-        c.id AS campionato_id, 
-        c.nome AS campionato_nome,
-        c.logo AS campionato_logo,
-        s.id AS squadra_id,
-        s.nome AS squadra_nome,
-        s.logo AS squadra_logo
-    FROM 
-        campionati c
-    JOIN 
-        competizioni cp ON JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.tipo')) = '" . $tipo . "'
-                      AND JSON_UNQUOTE(JSON_EXTRACT(cp.params, '$.stato')) = '" . $stato . "'
-    JOIN 
-        squadre s ON s.campionato_id = c.id;
-";
+if (!isset($_GET['id'])) {
+    header('Location: index.php');
+    exit;
+}
 
-// Supponiamo che $db sia l'oggetto della connessione al database
-$result = $db->getQueryResult($query);
-
+$result = generaHome();
 if ($result) {
     // Array per memorizzare i dati raggruppati per campionato
     $campionati = [];
