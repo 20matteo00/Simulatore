@@ -219,8 +219,8 @@ function generaPartiteStatistiche($squadre, $var)
                 $matches["partita" . $matchNumber] = array(
                     "squadra1" => $home,
                     "squadra2" => $away,
-                    "gol1" => "-",
-                    "gol2" => "-"
+                    "gol1" => "",
+                    "gol2" => ""
                 );
                 $matchNumber++;
             }
@@ -244,8 +244,8 @@ function generaPartiteStatistiche($squadre, $var)
                 $matchesReverse["partita" . $matchNumber] = array(
                     "squadra1" => $match["squadra2"],
                     "squadra2" => $match["squadra1"],
-                    "gol1" => "-",
-                    "gol2" => "-"
+                    "gol1" => "",
+                    "gol2" => ""
                 );
                 $matchNumber++;
             }
@@ -280,6 +280,8 @@ function generaPartiteStatistiche($squadre, $var)
 
 }
 
+/* DB */
+
 function getCampionatoNameById($id)
 {
     global $db;
@@ -296,6 +298,47 @@ function getSquadraNameById($id)
     $result = $db->getQueryResult($query);
     $r = $result->fetch_assoc();
     return $r['nome'];
+}
+
+// FUNZIONE AUSILIARIA: Carica il JSON delle partite dal DB
+function getPartiteJSON($compId) {
+    global $db;
+    $query = "SELECT partite FROM competizioni WHERE id = " . $compId;
+    $result = $db->getQueryResult($query);
+    $row = $result->fetch_assoc();
+    return json_decode($row['partite'], true);
+}
+
+// FUNZIONE AUSILIARIA: Salva il JSON aggiornato nel DB
+function updatePartiteJSON($compId, $jsonArray) {
+    global $db;
+    $mergedJSON = json_encode($jsonArray);
+    $updateQuery = "UPDATE competizioni SET partite = '" . $mergedJSON . "' WHERE id = " . $compId;
+    $db->executeQuery($updateQuery);
+}
+
+
+/* UTILITY */
+function abbreviaStringa($stringa)
+{
+    // Rimuove eventuali spazi in eccesso all'inizio e alla fine
+    $stringa = trim($stringa);
+
+    // Se la stringa è vuota, restituisce una stringa vuota
+    if (empty($stringa)) {
+        return "";
+    }
+
+    // Divide la stringa in parole (basato su spazi)
+    $parole = preg_split('/\s+/', $stringa);
+
+    if (count($parole) === 1) {
+        // Se c'è una sola parola, prendi le prime 3 lettere
+        return substr($parole[0], 0, 3);
+    } else {
+        // Se ci sono almeno due parole, prendi le prime 2 lettere della prima e la prima lettera della seconda
+        return substr($parole[0], 0, 2) . substr($parole[1], 0, 1);
+    }
 }
 
 ?>

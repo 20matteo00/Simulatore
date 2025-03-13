@@ -41,3 +41,8 @@
   height: 50px;
   object-fit: contain;
 }
+
+/*CALENDARIO*/
+.bottone{
+  border-radius: 50%;
+}
