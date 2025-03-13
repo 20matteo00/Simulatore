@@ -108,7 +108,6 @@ $compId = $_GET['id']; // L'ID della competizione
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['blockcomp'] = "calendario";
     // Invia partita: aggiorna il punteggio di una singola partita
     if (isset($_POST['invia_partita'])) {
         $campionato = $_POST['campionato'];

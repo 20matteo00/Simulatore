@@ -3,15 +3,10 @@
     global $db;
     $partite = checkPartiteStatistiche("partite");
     $statistiche = checkPartiteStatistiche("statistiche");
-    // Se 'blockcomp' è presente in GET, lo trasferiamo a POST e lo rimuoviamo dalla URL
-    if (isset($_SESSION['blockcomp'])) {
-        $_POST['blockcomp'] = $_SESSION['blockcomp'];
-    }
 
     // Quando 'blockcomp' è stato passato via POST, carica la vista corretta
     if (isset($_POST['blockcomp'])) {
         $blockcomp = $_POST['blockcomp'];
-        unset($_SESSION['blockcomp']);
         switch ($blockcomp) {
             case 'calendario':
                 include "page/view/calendario.php";
@@ -33,7 +28,7 @@
                 break;
         }
     } else {
-        include "page/view/home.php";
+        include "page/view/calendario.php";
     }
 
     // Carica il blocco delle competizioni
