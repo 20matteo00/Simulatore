@@ -10,11 +10,11 @@ if (isset($_GET['id'])) {
     <div class="container text-center">
         <div class="row justify-content-center d-none d-lg-flex">
             <!-- Bottone home -->
-            <div class="col mb-3">
+            <!-- <div class="col mb-3">
                 <button class="btn btn-success w-100" type="submit" name="blockcomp" value="home">
                     <i class="bi bi-house"></i> <?php echo HOME ?>
                 </button>
-            </div>
+            </div> -->
             <!-- Bottone Calendario -->
             <div class="col mb-3">
                 <button class="btn btn-success w-100" type="submit" name="blockcomp" value="calendario">

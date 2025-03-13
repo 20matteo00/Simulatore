@@ -6,7 +6,6 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
-
 ?>
 
 <div class="container mt-4">

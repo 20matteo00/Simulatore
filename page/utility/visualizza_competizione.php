@@ -3,6 +3,7 @@
     global $db;
     $partite = checkPartiteStatistiche("partite");
     $statistiche = checkPartiteStatistiche("statistiche");
+    calcolateStatistiche($statistiche, $partite, $_GET['id']);
 
     // Quando 'blockcomp' è stato passato via POST, carica la vista corretta
     if (isset($_POST['blockcomp'])) {
@@ -20,11 +21,8 @@
             case 'statistiche':
                 include "page/view/statistiche.php";
                 break;
-            case 'home':
-                include "page/view/home.php";
-                break;
             default:
-                include "page/view/home.php"; // Fallback
+                include "page/view/calendario.php"; // Fallback
                 break;
         }
     } else {

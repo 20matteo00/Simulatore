@@ -280,6 +280,67 @@ function generaPartiteStatistiche($squadre, $var)
 
 }
 
+function calcolateStatistiche($statistiche, $partite, $idcomp)
+{
+    global $db;
+    // Azzera tutte le statistiche prima del calcolo, mantenendo la struttura
+    foreach ($statistiche as $campId => &$squadre) {
+        foreach ($squadre as &$stat) {
+            $stat = array(
+                "NC" => 0,
+                "NT" => 0,
+                "PC" => 0,
+                "PT" => 0,
+                "VC" => 0,
+                "VT" => 0,
+                "GFC" => 0,
+                "GFT" => 0,
+                "GSC" => 0,
+                "GST" => 0,
+                "squadra" => $stat['squadra']  // Mantieni il valore della squadra
+            );
+        }
+    }
+
+    // Calcolo delle statistiche
+    foreach ($partite as $campId => $giornate) {
+        foreach ($giornate as $giornata => $partiteGiornata) {
+            foreach ($partiteGiornata as $partita => $p) {
+
+                if (!isset($p['gol1'], $p['gol2'], $p['squadra1'], $p['squadra2']))
+                    continue;
+                if (!is_numeric($p['gol1']) || !is_numeric($p['gol2']))
+                    continue;
+                $gol1 = intval($p['gol1']);
+                $gol2 = intval($p['gol2']);
+                $squadra1 = $p['squadra1'];
+                $squadra2 = $p['squadra2'];
+                // Aggiornamento gol
+                $statistiche[$campId][$squadra1]['GFC'] += $gol1;
+                $statistiche[$campId][$squadra1]['GSC'] += $gol2;
+                $statistiche[$campId][$squadra2]['GFT'] += $gol2;
+                $statistiche[$campId][$squadra2]['GST'] += $gol1;
+
+                // Aggiornamento risultati
+                if ($gol1 > $gol2) {
+                    $statistiche[$campId][$squadra1]['VC'] += 1;
+                    $statistiche[$campId][$squadra2]['PT'] += 1;
+                } elseif ($gol1 < $gol2) {
+                    $statistiche[$campId][$squadra2]['VT'] += 1;
+                    $statistiche[$campId][$squadra1]['PC'] += 1;
+                } else {
+                    $statistiche[$campId][$squadra1]['NC'] += 1;
+                    $statistiche[$campId][$squadra2]['NT'] += 1;
+                }
+            }
+        }
+    }
+
+    // Aggiorno il database con il nuovo JSON delle statistiche
+    $statisticheJson = json_encode($statistiche);
+    $db->executeQuery("UPDATE competizioni SET statistiche = '" . $statisticheJson . "' WHERE id = " . $idcomp);
+}
+
 /* DB */
 
 function getCampionatoNameById($id)
@@ -301,7 +362,8 @@ function getSquadraNameById($id)
 }
 
 // FUNZIONE AUSILIARIA: Carica il JSON delle partite dal DB
-function getPartiteJSON($compId) {
+function getPartiteJSON($compId)
+{
     global $db;
     $query = "SELECT partite FROM competizioni WHERE id = " . $compId;
     $result = $db->getQueryResult($query);
@@ -310,7 +372,8 @@ function getPartiteJSON($compId) {
 }
 
 // FUNZIONE AUSILIARIA: Salva il JSON aggiornato nel DB
-function updatePartiteJSON($compId, $jsonArray) {
+function updatePartiteJSON($compId, $jsonArray)
+{
     global $db;
     $mergedJSON = json_encode($jsonArray);
     $updateQuery = "UPDATE competizioni SET partite = '" . $mergedJSON . "' WHERE id = " . $compId;
